@@ -6,6 +6,8 @@ import br.aeso.projeto.cliente.Cliente;
 import br.aeso.projeto.cliente.ControladorCliente;
 import br.aeso.projeto.fornecedor.ControladorFornecedor;
 import br.aeso.projeto.fornecedor.Fornecedor;
+import br.aeso.projeto.notafiscal.ControladorNotaFiscal;
+import br.aeso.projeto.notafiscal.NotaFiscal;
 import br.aeso.projeto.pedido.ControladorPedido;
 import br.aeso.projeto.pedido.Pedido;
 import br.aeso.projeto.produto.ControladorProduto;
@@ -15,8 +17,11 @@ import br.aeso.projeto.util.CodigoInexistenteException;
 import br.aeso.projeto.util.FornecedorNaoEncontradoException;
 import br.aeso.projeto.util.ListaClienteVaziaException;
 import br.aeso.projeto.util.ListaFornecedorVaziaException;
+import br.aeso.projeto.util.ListaNotaFiscalNaoEncontradaException;
+import br.aeso.projeto.util.ListaPedidoVaziaException;
 import br.aeso.projeto.util.ListaProdutoVaziaException;
 import br.aeso.projeto.util.ListaVendedorVaziaException;
+import br.aeso.projeto.util.NotaFiscalNaoEncontradaException;
 import br.aeso.projeto.util.PedidoNaoEncontradoException;
 import br.aeso.projeto.util.ProdutoNaoEncontradoException;
 import br.aeso.projeto.util.VendedorNaoEncontradoException;
@@ -30,6 +35,7 @@ public class Fachada {
 	private ControladorCliente controladorCliente;
 	private ControladorFornecedor controladorFornecedor;
 	private ControladorPedido controladorPedido;
+	private ControladorNotaFiscal controladorNotafiscal;
 	
 	public Fachada(){
 		controladorCliente = new ControladorCliente();
@@ -37,6 +43,7 @@ public class Fachada {
 		controladorProduto = new ControladorProduto();
 		controladorFornecedor = new ControladorFornecedor();
 		controladorPedido = new ControladorPedido();
+		controladorNotafiscal = new ControladorNotaFiscal();
 	}
 	
 	//Bloco de Cliente
@@ -162,8 +169,33 @@ public class Fachada {
 		return controladorPedido.procurarPedido(codigo);
 	}
 	
-	public void listarPedido(String codigo) throws CodigoInexistenteException{
-		controladorPedido.listarPedido(codigo);
+	public ArrayList<Pedido> listarPedido() throws ListaPedidoVaziaException{
+		return controladorPedido.listarPedido();
 	}
 	
+	//Bloco de Nota Fiscal
+	public void cadastrarNotaFiscal(NotaFiscal notaFiscal) throws NotaFiscalNaoEncontradaException{
+		controladorNotafiscal.cadastrarNotaFiscal(notaFiscal);
+	}
+	
+	public void atualizarNotaFiscal (NotaFiscal notaFiscal) throws CodigoInexistenteException{
+		controladorNotafiscal.atualizarNotaFiscal(notaFiscal);
+	}
+	
+	public boolean removerNotaFiscal (String codigo) throws NotaFiscalNaoEncontradaException, CodigoInexistenteException{
+		if(codigo != null){
+			controladorNotafiscal.removerNotaFiscal(codigo);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public NotaFiscal procurarNotaFiscal (String codigo) throws CodigoInexistenteException{
+		return controladorNotafiscal.procurarNotaFiscal(codigo);
+	}
+	
+	public ArrayList<NotaFiscal> listarNotaFiscal() throws ListaNotaFiscalNaoEncontradaException{
+		return controladorNotafiscal.listarNotaFiscal();
+	}
 }

@@ -2,7 +2,9 @@ package br.aeso.projeto.pedido;
 
 import java.util.ArrayList;
 
+import br.aeso.projeto.cliente.Cliente;
 import br.aeso.projeto.util.CodigoInexistenteException;
+import br.aeso.projeto.util.ListaPedidoVaziaException;
 import br.aeso.projeto.util.PedidoNaoEncontradoException;
 
 public interface IRepositorioPedido {
@@ -11,6 +13,5 @@ public interface IRepositorioPedido {
 	public boolean remover (Pedido pedido) throws PedidoNaoEncontradoException;
 	public Pedido procurar (String codigo) throws CodigoInexistenteException;
 	public boolean existe (String codigo) throws CodigoInexistenteException;
-	public ArrayList<Pedido> listar();
-	public void listarTudo(String codigoPedido) throws CodigoInexistenteException;
+	public ArrayList<Pedido> listar() throws ListaPedidoVaziaException;
 }

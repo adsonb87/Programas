@@ -1,6 +1,11 @@
 package br.aeso.projeto.pedido;
 
+import java.util.ArrayList;
+
+import br.aeso.projeto.cliente.Cliente;
 import br.aeso.projeto.util.CodigoInexistenteException;
+import br.aeso.projeto.util.ListaClienteVaziaException;
+import br.aeso.projeto.util.ListaPedidoVaziaException;
 import br.aeso.projeto.util.PedidoNaoEncontradoException;
 
 public class ControladorPedido {
@@ -32,8 +37,8 @@ public class ControladorPedido {
 		return repositorioPedido.procurar(codigo);
 	}
 	
-	public void listarPedido(String codigo) throws CodigoInexistenteException{
-		repositorioPedido.listarTudo(codigo);
+	public ArrayList<Pedido> listarPedido() throws ListaPedidoVaziaException{
+		return repositorioPedido.listar();
 	}
 
 }

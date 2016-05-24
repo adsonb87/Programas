@@ -1,72 +1,61 @@
 package br.aeso.projeto.pedido;
 
+import java.util.ArrayList;
+
+import br.aeso.projeto.cliente.Cliente;
+import br.aeso.projeto.notafiscal.NotaFiscal;
 import br.aeso.projeto.produto.Produto;
 import br.aeso.projeto.util.CodigoInexistenteException;
+import br.aeso.projeto.util.ListaPedidoVaziaException;
 import br.aeso.projeto.util.PedidoNaoEncontradoException;
 import br.aeso.projeto.vendedor.Vendedor;
 
 public class TestePedido {
 
 	public static void main(String[] args) {
+		Cliente cliente = new Cliente("1", "Bina", "endereco", "telefone");
+		Vendedor vendedor = new Vendedor("2", "Manoel", "endereco", "telefone");
+			
+		NotaFiscal notaFiscal = new NotaFiscal("1", cliente, vendedor);
 		
-		Produto pr = new Produto("01", "Salgadinho de cebola", 4, "10/10/2015");
-		Produto pr1 = new Produto("02", "Salgadinho de frango", 5, "10/10/2015");
-		Vendedor v = new Vendedor("01", "Ozeias", "Av. nacional", "00000");
-		Vendedor v1 = new Vendedor("02", "Baubino", "Av. nacional", "00000");
-		RepositorioPedidoArray r = new RepositorioPedidoArray();
+		Pedido pedido = new Pedido(notaFiscal, "1", new Produto("123", "Papel", 10, "12/12/2017"), 10);
+		Pedido pedido2 = new Pedido(notaFiscal, "2", new Produto("321", "Papel2", 20, "12/12/2017"), 5);
+		Pedido pedido3 = new Pedido(notaFiscal, "3", new Produto("567", "Papel3", 30, "12/12/2017"), 1);
 		
-		Pedido pedido;
-		
-		
-		try {
-			pedido = new Pedido("01", v1, pr, 10);
-			r.cadastrar(pedido);
-		} catch (PedidoNaoEncontradoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+		IRepositorioPedido repositorio = new RepositorioPedidoArray();
 		
 		try {
-			pedido = new Pedido("01", v1, pr1, 10);
-			r.cadastrar(pedido);
-		} catch (PedidoNaoEncontradoException e1) {
+			repositorio.cadastrar(pedido);
+			repositorio.cadastrar(pedido2);
+			repositorio.cadastrar(pedido3);
+		} catch (PedidoNaoEncontradoException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		try {
-			pedido = new Pedido("01", v1, pr1, 20);
-			r.cadastrar(pedido);
-		} catch (PedidoNaoEncontradoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		try {
-			pedido = new Pedido("01", v1, pr, 30);
-			r.cadastrar(pedido);
-		} catch (PedidoNaoEncontradoException e1) {
+			ArrayList<Pedido> lista = repositorio.listar();
+			System.out.println(lista.toString());
+		} catch (ListaPedidoVaziaException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 		
-		
+		pedido.setQuantidadeProduto(1);
 		try {
-			pedido = new Pedido("02", v, pr, 30);
-			r.cadastrar(pedido);
-		} catch (PedidoNaoEncontradoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			r.listarTudo("04");
+			repositorio.atualizar(pedido);
 		} catch (CodigoInexistenteException e) {
-			System.out.println(e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
+		try {
+			ArrayList<Pedido> lista = repositorio.listar();
+			System.out.println(lista.toString());
+		} catch (ListaPedidoVaziaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

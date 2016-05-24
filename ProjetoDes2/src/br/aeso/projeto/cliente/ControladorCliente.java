@@ -15,6 +15,7 @@ public class ControladorCliente {
 	}
 	
 	public void cadastrarCliente(Cliente cliente) throws ClienteNaoEncontradoException{
+		
 		repositorioCliente.cadastrar(cliente);
 	}
 	

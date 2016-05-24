@@ -1,29 +1,34 @@
 package br.aeso.projeto.pedido;
 
+import java.util.ArrayList;
+
+import br.aeso.projeto.notafiscal.NotaFiscal;
 import br.aeso.projeto.produto.Produto;
 import br.aeso.projeto.util.CodigoInexistenteException;
 import br.aeso.projeto.vendedor.Vendedor;
 
 public class Pedido {
 	
+	private NotaFiscal notaFiscal;
 	private String codigoPedido;
-	private String codigoProduto;
-	private String nomeProduto;
-	private String codigoVendedor;
-	private String nomeVendedor;
+	private Produto produto;
 	private double quantidadeProduto;
-	private double precoProduto;
 	
-	public Pedido(String codigoPedido, Vendedor vendedor, Produto produto, double quantidadeProduto){
+	public Pedido(NotaFiscal notaFiscal, String codigoPedido, Produto produto, double quantidadeProduto){
+		this.notaFiscal = notaFiscal;
 		this.codigoPedido = codigoPedido;
-		this.codigoVendedor = vendedor.getCodigoVendedor();
-		this.nomeVendedor = vendedor.getNome();
-		this.codigoProduto = produto.getCodigoProduto();
-		this.nomeProduto = produto.getNome();
-		this.precoProduto = produto.getPrecoProduto();
+		this.produto = produto;
 		this.quantidadeProduto = quantidadeProduto;
 	}
 
+	public NotaFiscal getNotaFiscal() {
+		return this.notaFiscal;
+	}
+	
+	public void setNotaFiscal(NotaFiscal notaFiscal) {
+		this.notaFiscal = notaFiscal;
+	}
+	
 	public String getCodigoPedido() {
 		return codigoPedido;
 	}
@@ -32,36 +37,12 @@ public class Pedido {
 		this.codigoPedido = codigoPedido;
 	}
 
-	public String getCodigoProduto() {
-		return codigoProduto;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setCodigoProduto(String codigoProduto) {
-		this.codigoProduto = codigoProduto;
-	}
-
-	public String getNomeProduto() {
-		return nomeProduto;
-	}
-
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
-	}
-
-	public String getCodigoVendedor() {
-		return codigoVendedor;
-	}
-
-	public void setCodigoVendedor(String codigoVendedor) {
-		this.codigoVendedor = codigoVendedor;
-	}
-
-	public String getNomeVendedor() {
-		return nomeVendedor;
-	}
-
-	public void setNomeVendedor(String nomeVendedor) {
-		this.nomeVendedor = nomeVendedor;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public double getQuantidadeProduto() {
@@ -72,19 +53,11 @@ public class Pedido {
 		this.quantidadeProduto = quantidadeProduto;
 	}
 
-	public double getPrecoProduto() {
-		return precoProduto;
-	}
-
-	public void setPrecoProduto(double precoProduto) {
-		this.precoProduto = precoProduto;
-	}
-
 	@Override
 	public String toString() {
-		return "Pedido [codigoPedido=" + codigoPedido + ", codigoProduto=" + codigoProduto + ", nomeProduto="
-				+ nomeProduto + ", codigoVendedor=" + codigoVendedor + ", nomeVendedor=" + nomeVendedor
-				+ ", quantidadeProduto=" + quantidadeProduto + ", precoProduto=" + precoProduto + "]";
+		return "Pedido [notaFiscal=" + notaFiscal.getCodigoNotaFiscal() + ", codigoPedido=" + codigoPedido + ", nomeProduto=" + produto.getNome()
+				+ ", precoProduto=" + produto.getPrecoProduto() +", quantidadeProduto=" + quantidadeProduto + ", precoPedido=" + quantidadeProduto*produto.getPrecoProduto() + "]\n";
 	}
+	
 	
 }

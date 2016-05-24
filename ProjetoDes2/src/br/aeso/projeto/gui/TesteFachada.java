@@ -19,17 +19,17 @@ public class TesteFachada {
 		
 		Fachada fc = new Fachada();
 		
-		Cliente c;
-		Fornecedor f;
-		Produto p;
-		Vendedor v;
-		Pedido pd;
+		Cliente cliente;
+		Fornecedor fornecedor;
+		Produto produto;
+		Vendedor vendedor;
+		Pedido pedido;
 		
-		c = new Cliente("01", "Adson", "Rua 25 de Janeiro, 439", "(81)999468642");
-		f = new Fornecedor("01", "Baubino Distribuidora", "Av. Perimetral, 1002", "(81)34273460");
-		p = new Produto("01", "Salgadinho de cebola", 3.50,"14/10/2016");
-		v = new Vendedor("01", "Alexandre", "Av. nacional, 129", "(81)998789999");
-		pd = new Pedido("01", v, p, 5);
+		cliente = new Cliente("01", "Adson", "Rua 25 de Janeiro, 439", "(81)999468642");
+		fornecedor = new Fornecedor("01", "Baubino Distribuidora", "Av. Perimetral, 1002", "(81)34273460");
+		produto = new Produto("01", "Salgadinho de cebola", 3.50,"14/10/2016");
+		vendedor = new Vendedor("01", "Alexandre", "Av. nacional, 129", "(81)998789999");
+		
 		
 	
 		
