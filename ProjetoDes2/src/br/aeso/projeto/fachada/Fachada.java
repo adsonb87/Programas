@@ -37,6 +37,8 @@ public class Fachada {
 	private ControladorPedido controladorPedido;
 	private ControladorNotaFiscal controladorNotafiscal;
 	
+	private static Fachada fachada;
+	
 	public Fachada(){
 		controladorCliente = new ControladorCliente();
 		controladorVendedor = new ControladorVendedor();
@@ -44,6 +46,13 @@ public class Fachada {
 		controladorFornecedor = new ControladorFornecedor();
 		controladorPedido = new ControladorPedido();
 		controladorNotafiscal = new ControladorNotaFiscal();
+	}
+	
+	public static Fachada getInstance(){
+		if(fachada == null){
+			fachada = new Fachada();
+		}
+		return fachada;
 	}
 	
 	//Bloco de Cliente
