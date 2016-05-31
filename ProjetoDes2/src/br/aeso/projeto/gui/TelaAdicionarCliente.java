@@ -65,6 +65,7 @@ public class TelaAdicionarCliente extends JPanel {
 					fachada.cadastrarCliente(cliente);
 					limparCampos();
 				} catch (ClienteNaoEncontradoException e1) {
+					
 					System.out.println(e1.getMessage());
 				}
 			}
