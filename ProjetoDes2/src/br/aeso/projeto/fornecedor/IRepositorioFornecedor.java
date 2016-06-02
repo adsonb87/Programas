@@ -8,10 +8,10 @@ import br.aeso.projeto.util.ListaFornecedorVaziaException;
 
 public interface IRepositorioFornecedor {
 	
-	public void cadastrar (Fornecedor fornecedor) throws FornecedorNaoEncontradoException;
-	public void atualizar (Fornecedor fornecedor) throws CodigoInexistenteException;
-	public boolean remover (Fornecedor fornecedor) throws FornecedorNaoEncontradoException;
-	public Fornecedor procurar (String codigo) throws CodigoInexistenteException;
-	public boolean existe (String codigo) throws CodigoInexistenteException;
-	public ArrayList<Fornecedor> listar() throws ListaFornecedorVaziaException;
+	public void cadastrar (Fornecedor fornecedor);
+	public void atualizar (Fornecedor fornecedor);
+	public boolean remover (Fornecedor fornecedor);
+	public Fornecedor procurar (String codigo);
+	public boolean existe (String codigo);
+	public ArrayList<Fornecedor> listar();
 }

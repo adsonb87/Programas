@@ -19,77 +19,53 @@ public class RepositorioFornecedorMap implements IRepositorioFornecedor{
 	}
 	
 	@Override
-	public void cadastrar(Fornecedor fornecedor) throws FornecedorNaoEncontradoException {
-		if(fornecedor.getCodigoFornecedor() != null){
+	public void cadastrar(Fornecedor fornecedor){
+		if(!existe(fornecedor.getCodigoFornecedor())){
 			listaFornecedor.put(fornecedor.getCodigoFornecedor(), fornecedor);
-		}else{
-			throw new FornecedorNaoEncontradoException();
 		}
-		
 	}
 
 	@Override
-	public void atualizar(Fornecedor fornecedor) throws CodigoInexistenteException {
-		if(fornecedor.getCodigoFornecedor() != null){
+	public void atualizar(Fornecedor fornecedor){
+		if(existe(fornecedor.getCodigoFornecedor())){
 			if(listaFornecedor.containsKey(fornecedor.getCodigoFornecedor())){
 				listaFornecedor.replace(fornecedor.getCodigoFornecedor(), fornecedor);
-//				listaFornecedor.remove(fornecedor.getCodigoFornecedor());
-//				listaFornecedor.put(fornecedor.getCodigoFornecedor(), fornecedor);
 			}
-		}else{
-			throw new CodigoInexistenteException();
-		}
-		
+		}		
 	}
 
 	@Override
-	public boolean remover(Fornecedor fornecedor) throws FornecedorNaoEncontradoException {
-		if(fornecedor.getCodigoFornecedor() != null){
-			if(listaFornecedor.containsKey(fornecedor.getCodigoFornecedor())){
-				listaFornecedor.remove(fornecedor.getCodigoFornecedor(), fornecedor);
-				return true;
-			}else{
-				return false;
-			}
+	public boolean remover(Fornecedor fornecedor){
+		if(existe(fornecedor.getCodigoFornecedor())){
+			listaFornecedor.remove(fornecedor.getCodigoFornecedor(), fornecedor);
+			return true;
 		}else{
-			throw new FornecedorNaoEncontradoException();
+			return false;
 		}
 	}
 
 	@Override
-	public Fornecedor procurar(String codigo) throws CodigoInexistenteException {
-		if(codigo != null){
-			if(listaFornecedor.containsKey(codigo)){
-				return listaFornecedor.get(codigo);
-			}else{
-				return null;
-			}
+	public Fornecedor procurar(String codigo){
+		if(existe(codigo)){
+			return listaFornecedor.get(codigo);
 		}else{
-			throw new CodigoInexistenteException();
+			return null;
 		}
 	}
 
 	@Override
-	public boolean existe(String codigo) throws CodigoInexistenteException {
+	public boolean existe(String codigo){
 		if(codigo != null){
 			if(listaFornecedor.containsKey(codigo)){
 				return true;
-			}else{
-				return false;
 			}
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<Fornecedor> listar() throws ListaFornecedorVaziaException {
-		if(!listaFornecedor.isEmpty()){
-			List<Fornecedor> listaAuxiliar = (List) Arrays.asList(listaFornecedor.toString());
-			return (ArrayList<Fornecedor>) listaAuxiliar;
-		}else{
-			throw new ListaFornecedorVaziaException();
-		}
+	public ArrayList<Fornecedor> listar(){
+		List<Fornecedor> listaAuxiliar = (List) Arrays.asList(listaFornecedor.toString());
+		return (ArrayList<Fornecedor>) listaAuxiliar;
 	}
-
 }

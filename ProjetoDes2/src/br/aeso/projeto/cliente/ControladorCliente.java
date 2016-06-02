@@ -15,28 +15,43 @@ public class ControladorCliente {
 	}
 	
 	public void cadastrarCliente(Cliente cliente) throws ClienteNaoEncontradoException{
-		
-		repositorioCliente.cadastrar(cliente);
+		if(cliente.getCodigoCliente() != null){
+			repositorioCliente.cadastrar(cliente);
+		}else{
+			throw new ClienteNaoEncontradoException();
+		}
 	}
 	
 	public void atualizarCliente (Cliente cliente) throws CodigoInexistenteException{
-		repositorioCliente.atualizar(cliente);
+		if(cliente.getCodigoCliente() != null){
+			repositorioCliente.atualizar(cliente);
+		}else{
+			throw new CodigoInexistenteException();
+		}
 	}
 	
-	public boolean removerCliente (String codigo) throws ClienteNaoEncontradoException, CodigoInexistenteException{
-		if(repositorioCliente.existe(codigo)){
-			repositorioCliente.remover(repositorioCliente.procurar(codigo));
-			return true;
+	public boolean removerCliente (String codigo) throws CodigoInexistenteException{
+		if(codigo != null){
+			if(repositorioCliente.existe(codigo)){
+				repositorioCliente.remover(repositorioCliente.procurar(codigo));
+				return true;
+			}else{
+				return false;
+			}
 		}else{
-			return false;
+			throw new CodigoInexistenteException();
 		}
 	}
 	
 	public Cliente procurarCliente (String codigo) throws CodigoInexistenteException{
-		return repositorioCliente.procurar(codigo);
+		if(codigo != null){
+			return repositorioCliente.procurar(codigo);
+		}else{
+			throw new CodigoInexistenteException();
+		}
 	}
 	
-	public ArrayList<Cliente> listarCliente() throws ListaClienteVaziaException{
+	public ArrayList<Cliente> listarCliente(){
 		return repositorioCliente.listar();
 	}
 	

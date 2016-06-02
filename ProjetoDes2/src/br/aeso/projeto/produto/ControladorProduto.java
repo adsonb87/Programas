@@ -15,27 +15,43 @@ public class ControladorProduto {
 	}
 	
 	public void cadastrarProduto(Produto produto) throws ProdutoNaoEncontradoException{
-		repositorioProduto.cadastrar(produto);
+		if(produto.getCodigoProduto()!=null){
+			repositorioProduto.cadastrar(produto);
+		}else{
+			throw new ProdutoNaoEncontradoException();
+		}
 	}
 	
 	public void atualizarProduto(Produto produto) throws CodigoInexistenteException{
-		repositorioProduto.atualizar(produto);
+		if(produto.getCodigoProduto()!=null){
+			repositorioProduto.atualizar(produto);
+		}else{
+			throw new CodigoInexistenteException();
+		}
 	}
 	
-	public boolean removerProduto(String codigo) throws CodigoInexistenteException, ProdutoNaoEncontradoException{
-		if(repositorioProduto.existe(codigo)){
-			repositorioProduto.remover(repositorioProduto.procurar(codigo));
-			return true;
+	public boolean removerProduto(String codigo) throws CodigoInexistenteException{
+		if(codigo!=null){
+			if(repositorioProduto.existe(codigo)){
+				repositorioProduto.remover(repositorioProduto.procurar(codigo));
+				return true;
+			}else{
+				return false;
+			}
 		}else{
-			return false;
+			throw new CodigoInexistenteException();		
 		}
 	}
 	
 	public Produto procurarProduto(String codigo) throws CodigoInexistenteException{
-		return repositorioProduto.procurar(codigo);
+		if(codigo!=null){
+			return repositorioProduto.procurar(codigo);
+		}else{
+			throw new CodigoInexistenteException();
+		}
 	}
 	
-	public ArrayList<Produto> listarProduto() throws ListaProdutoVaziaException{
+	public ArrayList<Produto> listarProduto(){
 		return repositorioProduto.listar();
 	}
 	

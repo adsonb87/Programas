@@ -20,28 +20,43 @@ public class ControladorNotaFiscal {
 	}
 	
 	public void cadastrarNotaFiscal(NotaFiscal notaFiscal) throws NotaFiscalNaoEncontradaException{
-		
-		repositorioNotaFiscal.cadastrar(notaFiscal);
+		if(notaFiscal.getCodigoNotaFiscal()!=null){
+			repositorioNotaFiscal.cadastrar(notaFiscal);
+		}else{
+			throw new NotaFiscalNaoEncontradaException();
+		}
 	}
 	
 	public void atualizarNotaFiscal (NotaFiscal notaFiscal) throws CodigoInexistenteException{
-		repositorioNotaFiscal.atualizar(notaFiscal);
+		if(notaFiscal.getCodigoNotaFiscal()!=null){
+			repositorioNotaFiscal.atualizar(notaFiscal);
+		}else{
+			throw new CodigoInexistenteException();
+		}
 	}
 	
-	public boolean removerNotaFiscal (String codigo) throws NotaFiscalNaoEncontradaException, CodigoInexistenteException{
-		if(repositorioNotaFiscal.existe(codigo)){
+	public boolean removerNotaFiscal (String codigo) throws CodigoInexistenteException{
+		if(codigo!=null){
+			if(repositorioNotaFiscal.existe(codigo)){
 			repositorioNotaFiscal.remover(repositorioNotaFiscal.procurar(codigo));
 			return true;
+			}else{
+				return false;
+			}
 		}else{
-			return false;
+			throw new CodigoInexistenteException();
 		}
 	}
 	
 	public NotaFiscal procurarNotaFiscal (String codigo) throws CodigoInexistenteException{
-		return repositorioNotaFiscal.procurar(codigo);
+		if(codigo!=null){
+			return repositorioNotaFiscal.procurar(codigo);
+		}else{
+			throw new CodigoInexistenteException();
+		}
 	}
 	
-	public ArrayList<NotaFiscal> listarNotaFiscal() throws ListaNotaFiscalNaoEncontradaException{
+	public ArrayList<NotaFiscal> listarNotaFiscal(){
 		return repositorioNotaFiscal.listar();
 	}
 }

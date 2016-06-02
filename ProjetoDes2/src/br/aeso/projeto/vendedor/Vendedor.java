@@ -1,6 +1,8 @@
 package br.aeso.projeto.vendedor;
 
-public class Vendedor {
+import java.io.Serializable;
+
+public class Vendedor implements Serializable{
 	private String codigoVendedor;
 	private String nome;
 	private String endereco;

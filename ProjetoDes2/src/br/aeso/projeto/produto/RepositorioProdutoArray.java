@@ -16,80 +16,65 @@ public class RepositorioProdutoArray implements IRepositorioProduto{
 	}
 	
 	@Override
-	public void cadastrar(Produto produto) throws ProdutoNaoEncontradoException{
-		if(produto.getCodigoProduto() != null){
+	public void cadastrar(Produto produto){
+		if(existe(produto.getCodigoProduto())){
 			listaProduto.add(produto);
-		}else{
-			throw new ProdutoNaoEncontradoException();
 		}
 	}
 
 	@Override
-	public void atualizar(Produto produto)throws CodigoInexistenteException{
-		if(produto.getCodigoProduto() != null){
+	public void atualizar(Produto produto){
+		if(existe(produto.getCodigoProduto())){
 			for(int i=0;i<listaProduto.size();i++){
 				if(listaProduto.get(i).getCodigoProduto().equals(produto.getCodigoProduto())){
-					listaProduto.get(i).setCodigoProduto(produto.getCodigoProduto());
-					listaProduto.get(i).setNome(produto.getNome());
-					listaProduto.get(i).setData(produto.getData());
-					listaProduto.get(i).setPrecoProduto(produto.getPrecoProduto());
+					listaProduto.set(i, produto);
+//					listaProduto.get(i).setCodigoProduto(produto.getCodigoProduto());
+//					listaProduto.get(i).setNome(produto.getNome());
+//					listaProduto.get(i).setData(produto.getData());
+//					listaProduto.get(i).setPrecoProduto(produto.getPrecoProduto());
 				}
 			}
-		}else{
-			throw new CodigoInexistenteException();
-		}
-		
-	}
-
-	@Override
-	public boolean remover(Produto produto) throws ProdutoNaoEncontradoException  {
-		if(produto.getCodigoProduto() != null){
-			if(listaProduto.contains(produto)){
-				listaProduto.remove(produto);
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			throw new ProdutoNaoEncontradoException();
 		}
 	}
 
 	@Override
-	public Produto procurar(String codigo)throws CodigoInexistenteException {
-		if(codigo != null){
+	public boolean remover(Produto produto){
+		if(existe(produto.getCodigoProduto())){
+			listaProduto.remove(produto);
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public Produto procurar(String codigo){
+		if(existe(codigo)){
 			for(int i=0; i<listaProduto.size();i++){
 				if(listaProduto.get(i).getCodigoProduto().equals(codigo)){
 					return listaProduto.get(i);
 				}
 			}
-			return null;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean existe(String codigo) throws CodigoInexistenteException{
+	public boolean existe(String codigo){
 		if(codigo != null){
 			for(int i=0;i<listaProduto.size();i++){
 				if(listaProduto.get(i).getCodigoProduto().equals(codigo)){
 					return true;
 				}
 			}
-			return false;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<Produto> listar() throws ListaProdutoVaziaException{
-		if(!listaProduto.isEmpty()){
-			return listaProduto;
-		}else{
-			throw new ListaProdutoVaziaException();
-		}
+	public ArrayList<Produto> listar(){
+		return listaProduto;
+		
 	}
 
 }

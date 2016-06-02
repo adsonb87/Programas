@@ -8,10 +8,10 @@ import br.aeso.projeto.util.ListaPedidoVaziaException;
 import br.aeso.projeto.util.PedidoNaoEncontradoException;
 
 public interface IRepositorioPedido {
-	public void cadastrar (Pedido pedido) throws PedidoNaoEncontradoException;
-	public void atualizar (Pedido pedido) throws CodigoInexistenteException;
-	public boolean remover (Pedido pedido) throws PedidoNaoEncontradoException;
-	public Pedido procurar (String codigo) throws CodigoInexistenteException;
-	public boolean existe (String codigo) throws CodigoInexistenteException;
-	public ArrayList<Pedido> listar() throws ListaPedidoVaziaException;
+	public void cadastrar (Pedido pedido);
+	public void atualizar (Pedido pedido);
+	public boolean remover (Pedido pedido);
+	public Pedido procurar (String codigo);
+	public boolean existe (String codigo);
+	public ArrayList<Pedido> listar();
 }

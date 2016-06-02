@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import br.aeso.projeto.util.CodigoInexistenteException;
@@ -23,191 +24,104 @@ public class RepositorioVendedorArquivo implements IRepositorioVendedor{
 	
 	@Override
 	public void cadastrar(Vendedor vendedor) throws VendedorNaoEncontradoException {
-		if(vendedor.getCodigoVendedor()!=null){
+		if(!this.existe(vendedor.getCodigoVendedor())) {
 			listaVendedor.add(vendedor);
-			try {
-				FileOutputStream fos;
-				fos = new FileOutputStream(endereco);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(listaVendedor);
-				oos.flush();
-				oos.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else{
-			throw new VendedorNaoEncontradoException();
+			gravarArquivoNaMemoria();
 		}
 	}
 
 	@Override
 	public void atualizar(Vendedor vendedor) throws CodigoInexistenteException {
-		if(vendedor.getCodigoVendedor()!=null){
-			
-			try {
-				FileInputStream fis;
-				fis = new FileInputStream(endereco);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				listaVendedor = (ArrayList<Vendedor>) ois.readObject();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			for(int i=0;i<listaVendedor.size();i++){
-				if(listaVendedor.get(i).getCodigoVendedor().equals(vendedor.getCodigoVendedor())){
-					listaVendedor.get(i).setCodigoVendedor(vendedor.getCodigoVendedor());
-					listaVendedor.get(i).setNome(vendedor.getNome());
-					listaVendedor.get(i).setEndereco(vendedor.getEndereco());
-					listaVendedor.get(i).setTelefone(vendedor.getTelefone());
+		if(this.existe(vendedor.getCodigoVendedor())){
+//			listaVendedor = lerArquivoDaMemoria();
+				for(int i=0;i<listaVendedor.size();i++){
+					if(listaVendedor.get(i).getCodigoVendedor().equals(vendedor.getCodigoVendedor())){
+						listaVendedor.get(i).setCodigoVendedor(vendedor.getCodigoVendedor());
+						listaVendedor.get(i).setNome(vendedor.getNome());
+						listaVendedor.get(i).setEndereco(vendedor.getEndereco());
+						listaVendedor.get(i).setTelefone(vendedor.getTelefone());
+					}
 				}
-			}
-			
-			try {
-				FileOutputStream fos;
-				fos = new FileOutputStream(endereco);
-				ObjectOutputStream oos = new ObjectOutputStream(fos);
-				oos.writeObject(listaVendedor);
-				oos.flush();
-				oos.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else{
-			throw new CodigoInexistenteException();
-		}
-
-		
-	}
-
-	@Override
-	public boolean remover(Vendedor vendedor) throws VendedorNaoEncontradoException {
-		if(vendedor.getCodigoVendedor() != null){
-			
-			try {
-				FileInputStream fis;
-				fis = new FileInputStream(endereco);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				listaVendedor = (ArrayList<Vendedor>) ois.readObject();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			if(listaVendedor.contains(vendedor)){
-				listaVendedor.remove(vendedor);
-				
-				try {
-					FileOutputStream fos;
-					fos = new FileOutputStream(endereco);
-					ObjectOutputStream oos = new ObjectOutputStream(fos);
-					oos.writeObject(listaVendedor);
-					oos.flush();
-					oos.close();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			throw new VendedorNaoEncontradoException();
+			gravarArquivoNaMemoria();
 		}
 	}
 
 	@Override
-	public Vendedor procurar(String codigo) throws CodigoInexistenteException {
-		if(codigo != null){
-			try {
-				FileInputStream fis;
-				fis = new FileInputStream(endereco);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				listaVendedor = (ArrayList<Vendedor>) ois.readObject();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			for(int i=0; i<listaVendedor.size(); i++){
-				if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
-					return listaVendedor.get(i);
-				}
-			}
-			return null;
+	public boolean remover(Vendedor vendedor){
+		listaVendedor = lerArquivoDaMemoria();
+		if(listaVendedor.contains(vendedor)){
+			listaVendedor.remove(vendedor);
+			gravarArquivoNaMemoria();
+			return true;
 		}else{
-			throw new CodigoInexistenteException();
-		}
-	}
-
-	@Override
-	public boolean existe(String codigo) throws CodigoInexistenteException {
-		if(codigo != null){
-			try {
-				FileInputStream fis;
-				fis = new FileInputStream(endereco);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				listaVendedor = (ArrayList<Vendedor>) ois.readObject();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			for(int i=0; i<listaVendedor.size(); i++){
-				if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
-					return true;
-				}
-			}
 			return false;
-		}else{
-			throw new CodigoInexistenteException();
 		}
 	}
 
 	@Override
-	public ArrayList<Vendedor> listar()throws ListaVendedorVaziaException{
+	public Vendedor procurar(String codigo){
+//		if(this.existe(codigo)){
+			listaVendedor = lerArquivoDaMemoria();
+				for(int i=0; i<listaVendedor.size(); i++){
+					if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
+						return listaVendedor.get(i);
+					}
+				}
+			return null;
+//		}else{
+//			return null;	
+//		}
+	}
+
+	@Override
+	public boolean existe(String codigo) {
+		if(codigo != null){
+			listaVendedor = lerArquivoDaMemoria();
+				for(int i=0; i<listaVendedor.size(); i++){
+					if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
+						return true;
+					}
+				}
+				return false;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public ArrayList<Vendedor> listar() {
+		ArrayList<Vendedor> lista = lerArquivoDaMemoria();
+		return lista;
+	}
+	
+	
+	public void gravarArquivoNaMemoria(){
 		try {
-			FileInputStream fis;
-			fis = new FileInputStream(endereco);
+			FileOutputStream fos;
+			fos = new FileOutputStream("C:/Users/adson_000/Desktop/temp/listaVendedor.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(this.listaVendedor);
+			oos.flush();
+			oos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Vendedor> lerArquivoDaMemoria(){
+		
+		ArrayList<Vendedor> listaMemoria = new ArrayList<>();
+		
+		FileInputStream fis;
+		
+		try {
+			fis = new FileInputStream("C:/Users/adson_000/Desktop/temp/listaVendedor.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			listaVendedor = (ArrayList<Vendedor>) ois.readObject();
+			listaMemoria = (ArrayList<Vendedor>) ois.readObject();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -219,11 +133,7 @@ public class RepositorioVendedorArquivo implements IRepositorioVendedor{
 			e.printStackTrace();
 		}
 		
-		if(!listaVendedor.isEmpty()){
-			return listaVendedor;
-		}else{
-			throw new ListaVendedorVaziaException();
-		}
+		return listaMemoria;
 	}
 	
 	

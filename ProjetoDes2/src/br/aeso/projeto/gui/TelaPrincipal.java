@@ -44,7 +44,7 @@ public class TelaPrincipal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 720, 440);
+		frame.setBounds(100, 100, 720, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -65,12 +65,33 @@ public class TelaPrincipal {
 		mnCliente.add(cadastrarClienteMN);
 		
 		JMenuItem atualizarClienteMN = new JMenuItem("Atualizar");
+		atualizarClienteMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaAtualizarCliente telaAttCliente = new TelaAtualizarCliente();
+				frame.setContentPane(telaAttCliente);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnCliente.add(atualizarClienteMN);
 		
 		JMenuItem removerClienteMN = new JMenuItem("Remover");
+		removerClienteMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaRemoverCliente telaRemoverCliente = new TelaRemoverCliente();
+				frame.setContentPane(telaRemoverCliente);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnCliente.add(removerClienteMN);
 		
 		JMenuItem procurarClienteMN = new JMenuItem("Procurar");
+		procurarClienteMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaProcurarCliente telaPCliente = new TelaProcurarCliente();
+				frame.setContentPane(telaPCliente);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnCliente.add(procurarClienteMN);
 		
 		JMenuItem listarClienteMN = new JMenuItem("Listar");

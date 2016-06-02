@@ -15,78 +15,60 @@ public class RepositorioNotaFiscalArray implements IRepositorioNotaFiscal{
 	}
 	
 	@Override
-	public void cadastrar(NotaFiscal notaFiscal)throws  NotaFiscalNaoEncontradaException{
-		if(notaFiscal.getCodigoNotaFiscal() != null){
+	public void cadastrar(NotaFiscal notaFiscal){
+		if(!existe(notaFiscal.getCodigoNotaFiscal())){
 			listaNotaFiscal.add(notaFiscal);
-		}else{
-			throw new NotaFiscalNaoEncontradaException();
 		}
-		
 	}
 
 	@Override
-	public void atualizar(NotaFiscal notaFiscal)throws CodigoInexistenteException {
-		if(notaFiscal.getCodigoNotaFiscal() != null){
+	public void atualizar(NotaFiscal notaFiscal){
+		if(existe(notaFiscal.getCodigoNotaFiscal())){
 			for(int i=0; i<listaNotaFiscal.size();i++){
 				if(listaNotaFiscal.get(i).getCodigoNotaFiscal().equals(notaFiscal.getCodigoNotaFiscal())){
 					listaNotaFiscal.set(i, notaFiscal);
 				}
 			}
-		}else{
-			throw new CodigoInexistenteException();
-		}
-		
-	}
-
-	@Override
-	public boolean remover(NotaFiscal notaFiscal)throws NotaFiscalNaoEncontradaException {
-		if(notaFiscal.getCodigoNotaFiscal() != null){
-			if(listaNotaFiscal.contains(notaFiscal)){
-				listaNotaFiscal.remove(notaFiscal);
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			throw new NotaFiscalNaoEncontradaException();
 		}
 	}
 
 	@Override
-	public NotaFiscal procurar(String codigo)throws CodigoInexistenteException{
-		if(codigo != null){
+	public boolean remover(NotaFiscal notaFiscal){
+		if(existe(notaFiscal.getCodigoNotaFiscal())){
+			listaNotaFiscal.remove(notaFiscal);
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public NotaFiscal procurar(String codigo){
+		if(existe(codigo)){
 			for(int i=0; i<listaNotaFiscal.size();i++){
 				if(listaNotaFiscal.get(i).getCodigoNotaFiscal().equals(codigo)){
 					return listaNotaFiscal.get(i);
 				}
 			}
-			return null;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean existe(String codigo)throws CodigoInexistenteException{
+	public boolean existe(String codigo){
 		if(codigo != null){
 			for(int i=0; i<listaNotaFiscal.size();i++){
 				if(listaNotaFiscal.get(i).getCodigoNotaFiscal().equals(codigo)){
 					return true;
 				}
-			}
-			return false;
-		}else{
-			throw new CodigoInexistenteException();
+			}		
 		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<NotaFiscal> listar()throws ListaNotaFiscalNaoEncontradaException {
-		if(!listaNotaFiscal.isEmpty()){
-			return listaNotaFiscal;
-		}else{
-			throw new ListaNotaFiscalNaoEncontradaException();
-		}
+	public ArrayList<NotaFiscal> listar(){
+		return listaNotaFiscal;
 	}
 
 }

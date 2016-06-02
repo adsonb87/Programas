@@ -30,12 +30,8 @@ public class TesteCliente2 {
 			System.out.println(e1.getMessage());
 		}
 		
-		try {
-			l = r.listarCliente();
-			System.out.println("Listar: "+l.toString());
-		} catch (ListaClienteVaziaException e) {
-			System.out.println(e.getMessage());
-		}
+		l = r.listarCliente();
+		System.out.println("Listar: "+l.toString());
 		
 //		try {
 //			System.out.println("Procurar "+r.procurarCliente("02"));
@@ -53,16 +49,12 @@ public class TesteCliente2 {
 		
 		try {
 			System.out.println("Remover: "+r.removerCliente("01"));
-		} catch (ClienteNaoEncontradoException | CodigoInexistenteException e1) {
+		} catch (CodigoInexistenteException e1) {
 			System.out.println(e1.getMessage());
 		}
 		
-		try {
-			l = r.listarCliente();
-			System.out.println("Listar: "+l.toString());
-		} catch (ListaClienteVaziaException e) {
-			System.out.println(e.getMessage());
-		}
+		l = r.listarCliente();
+		System.out.println("Listar: "+l.toString());
 		
 	}
 

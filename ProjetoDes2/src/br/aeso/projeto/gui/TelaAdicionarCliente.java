@@ -58,20 +58,10 @@ public class TelaAdicionarCliente extends JPanel {
 		JButton gravarBTN = new JButton("Gravar");
 		gravarBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					
-				try {
-					Cliente cliente = new Cliente(codigoTF.getText(), nomeTF.getText(), enderecoTF.getText(), telefoneTF.getText());
-					Fachada fachada = Fachada.getInstance();
-					fachada.cadastrarCliente(cliente);
-					limparCampos();
-				} catch (ClienteNaoEncontradoException e1) {
-					
-					System.out.println(e1.getMessage());
-				}
+				adicionarCliente();
 			}
 		});
-		
-		
+				
 		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -122,6 +112,17 @@ public class TelaAdicionarCliente extends JPanel {
 		);
 		setLayout(groupLayout);
 			
+	}
+	
+	private void adicionarCliente(){
+		try {
+			Cliente cliente = new Cliente(codigoTF.getText(), nomeTF.getText(), enderecoTF.getText(), telefoneTF.getText());
+			Fachada fachada = Fachada.getInstance();
+			fachada.cadastrarCliente(cliente);
+			limparCampos();
+		} catch (ClienteNaoEncontradoException e1) {
+			System.out.println(e1.getMessage());
+		}
 	}
 	
 	private void limparCampos(){

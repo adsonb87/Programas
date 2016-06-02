@@ -16,81 +16,64 @@ public class RepositorioVendedorArray implements IRepositorioVendedor{
 	}
 	
 	@Override
-	public void cadastrar(Vendedor vendedor) throws VendedorNaoEncontradoException{
-		if(vendedor.getCodigoVendedor() != null){
+	public void cadastrar(Vendedor vendedor){
+		if(existe(vendedor.getCodigoVendedor())){
 			listaVendedor.add(vendedor);
-		}else{
-			throw new VendedorNaoEncontradoException();
 		}
 	}
 
 	@Override
-	public void atualizar(Vendedor vendedor)throws CodigoInexistenteException {
-		if(vendedor.getCodigoVendedor() != null){
+	public void atualizar(Vendedor vendedor){
+		if(existe(vendedor.getCodigoVendedor())){
 			for(int i=0;i<listaVendedor.size();i++){
 				if(listaVendedor.get(i).getCodigoVendedor().equals(vendedor.getCodigoVendedor())){
-					listaVendedor.get(i).setCodigoVendedor(vendedor.getCodigoVendedor());
-					listaVendedor.get(i).setNome(vendedor.getNome());
-					listaVendedor.get(i).setEndereco(vendedor.getEndereco());
-					listaVendedor.get(i).setTelefone(vendedor.getTelefone());
+					listaVendedor.set(i, vendedor);
+//					listaVendedor.get(i).setCodigoVendedor(vendedor.getCodigoVendedor());
+//					listaVendedor.get(i).setNome(vendedor.getNome());
+//					listaVendedor.get(i).setEndereco(vendedor.getEndereco());
+//					listaVendedor.get(i).setTelefone(vendedor.getTelefone());
 				}
 			}
-		}else{
-			throw new CodigoInexistenteException();
-		}
-		
-	}
-
-	@Override
-	public boolean remover(Vendedor vendedor)throws VendedorNaoEncontradoException {
-		if(vendedor.getCodigoVendedor() != null){
-			if(listaVendedor.contains(vendedor)){
-				listaVendedor.remove(vendedor);
-				return true;
-			}else{
-				return false;
-			}
-		}else{
-			throw new VendedorNaoEncontradoException();
 		}
 	}
 
 	@Override
-	public Vendedor procurar(String codigo)throws CodigoInexistenteException {
-		if(codigo != null){
+	public boolean remover(Vendedor vendedor){
+		if(existe(vendedor.getCodigoVendedor())){
+			listaVendedor.remove(vendedor);
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public Vendedor procurar(String codigo){
+		if(existe(codigo)){
 			for(int i=0; i<listaVendedor.size();i++){
 				if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
 					return listaVendedor.get(i);
 				}
 			}
-			return null;
-		}else{
-			throw new CodigoInexistenteException();
 		}
-		
+		return null;
 	}
 
 	@Override
-	public boolean existe(String codigo)throws CodigoInexistenteException{
+	public boolean existe(String codigo){
 		if(codigo != null){
 			for(int i=0;i<listaVendedor.size();i++){
 				if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
 					return true;
 				}
 			}
-			return false;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<Vendedor> listar()throws ListaVendedorVaziaException {
-		if(!listaVendedor.isEmpty()){
-			return listaVendedor;
-		}else{
-			throw new ListaVendedorVaziaException();
-		}
+	public ArrayList<Vendedor> listar(){
+		return listaVendedor;
 	}
 
 }

@@ -55,8 +55,8 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return "Pedido [notaFiscal=" + notaFiscal.getCodigoNotaFiscal() + ", codigoPedido=" + codigoPedido + ", nomeProduto=" + produto.getNome()
-				+ ", precoProduto=" + produto.getPrecoProduto() +", quantidadeProduto=" + quantidadeProduto + ", precoPedido=" + quantidadeProduto*produto.getPrecoProduto() + "]\n";
+		return "Pedido [notaFiscal=" + notaFiscal.getCodigoNotaFiscal() + ", codigoPedido=" + codigoPedido + ", nomeProduto=" + produto.getNome()+ ", precoProduto=" 
+	+ produto.getPrecoProduto() +", quantidadeProduto=" + quantidadeProduto + ", precoPedido=" + quantidadeProduto*produto.getPrecoProduto() + "]\n";
 	}
 	
 	

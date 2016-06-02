@@ -19,59 +19,49 @@ public class RepositorioClienteSet implements IRepositorioCliente{
 	
 		
 	@Override
-	public void cadastrar(Cliente cliente) throws ClienteNaoEncontradoException {
-		if(cliente.getCodigoCliente() != null){
+	public void cadastrar(Cliente cliente){
+		if(!existe(cliente.getCodigoCliente())){
 			listaCliente.add(cliente);
-		}else{
-			throw new ClienteNaoEncontradoException();
 		}
 	}
 
 	@Override
-	public void atualizar(Cliente cliente) throws CodigoInexistenteException {
-		if (cliente.getCodigoCliente() != null){
+	public void atualizar(Cliente cliente){
+		if (existe(cliente.getCodigoCliente())){
 			List<Cliente> listaAuxiliar = new ArrayList<>(listaCliente);
 			for(int i=0; i<listaAuxiliar.size();i++){
 				if(listaAuxiliar.get(i).getCodigoCliente().equals(cliente.getCodigoCliente())){
 					listaAuxiliar.set(i, cliente);
 				}
 			}
-		}else{
-			throw new CodigoInexistenteException();
 		}
 	}
 
 	@Override
-	public boolean remover(Cliente cliente) throws ClienteNaoEncontradoException {
-		if(cliente.getCodigoCliente() != null){
-			if(listaCliente.contains(cliente)){
-				listaCliente.remove(cliente);
-				return true;
-			}else{
-				return false;
-			}
+	public boolean remover(Cliente cliente){
+		if(existe(cliente.getCodigoCliente())){
+			listaCliente.remove(cliente);
+			return true;
 		}else{
-			throw new ClienteNaoEncontradoException();
+			return false;
 		}
 	}
 
 	@Override
-	public Cliente procurar(String codigo) throws CodigoInexistenteException {
-		if(codigo != null){
+	public Cliente procurar(String codigo) {
+		if(existe(codigo)){
 			List<Cliente> listaAuxiliar = new ArrayList<>(listaCliente);
 			for(int i=0; i<listaAuxiliar.size();i++){
 				if(listaAuxiliar.get(i).getCodigoCliente().equals(codigo)){
 					return listaAuxiliar.get(i);
 				}
 			}
-			return null;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean existe(String codigo) throws CodigoInexistenteException {
+	public boolean existe(String codigo){
 		if(codigo != null){
 			List<Cliente> listaAuxiliar = new ArrayList<>(listaCliente);
 			for(int i=0;i<listaAuxiliar.size();i++){
@@ -79,20 +69,15 @@ public class RepositorioClienteSet implements IRepositorioCliente{
 					return true;
 				}
 			}
-			return false;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<Cliente> listar() throws ListaClienteVaziaException {
-		if(!listaCliente.isEmpty()){
-			ArrayList<Cliente> listaAuxiliar = new ArrayList<>(listaCliente);
-			return listaAuxiliar;
-		}else{
-			throw new ListaClienteVaziaException();
-		}
+	public ArrayList<Cliente> listar(){
+		ArrayList<Cliente> listaAuxiliar = new ArrayList<>(listaCliente);
+		return listaAuxiliar;
+		
 	}
 
 }

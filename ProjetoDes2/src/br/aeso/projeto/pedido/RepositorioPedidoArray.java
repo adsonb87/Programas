@@ -17,76 +17,60 @@ public class RepositorioPedidoArray implements IRepositorioPedido{
 	}
 	
 	@Override
-	public void cadastrar(Pedido pedido)throws PedidoNaoEncontradoException {
-		if(pedido.getCodigoPedido() != null){
+	public void cadastrar(Pedido pedido){
+		if(!existe(pedido.getCodigoPedido())){
 			listaPedido.add(pedido);
-		}else{
-			throw new PedidoNaoEncontradoException();
 		}
 	}
 
 	@Override
-	public void atualizar(Pedido pedido)throws CodigoInexistenteException {
-		if(pedido.getCodigoPedido()!=null){
+	public void atualizar(Pedido pedido){
+		if(existe(pedido.getCodigoPedido())){
 			for(int i=0;i<listaPedido.size();i++){
 				if(listaPedido.get(i).getCodigoPedido().equals(pedido.getCodigoPedido())){
 					listaPedido.set(i, pedido);
 				}
 			}
-		}else{
-			throw new CodigoInexistenteException();
 		}
 	}
 
 	@Override
-	public boolean remover(Pedido pedido) throws PedidoNaoEncontradoException{
-		if(pedido.getCodigoPedido() != null){
-			if(listaPedido.contains(pedido)){
-				listaPedido.remove(pedido);
-				return true;
-			}else{
-				return false;
-			}
+	public boolean remover(Pedido pedido){
+		if(existe(pedido.getCodigoPedido())){
+			listaPedido.remove(pedido);
+			return true;
 		}else{
-			throw new PedidoNaoEncontradoException();
+			return false;
 		}
 	}
 
 	@Override
-	public Pedido procurar(String codigo)throws CodigoInexistenteException{
-		if(codigo != null){
+	public Pedido procurar(String codigo){
+		if(existe(codigo)){
 			for(int i=0; i<listaPedido.size();i++){
 				if(listaPedido.get(i).getCodigoPedido().equals(codigo)){
 					return listaPedido.get(i);
 				}
 			}
-			return null;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean existe(String codigo)throws CodigoInexistenteException{
+	public boolean existe(String codigo){
 		if(codigo != null){
 			for(int i=0; i<listaPedido.size();i++){
 				if(listaPedido.get(i).getCodigoPedido().equals(codigo)){
 					return true;
 				}
 			}
-			return false;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<Pedido> listar()throws ListaPedidoVaziaException {
-		if(!listaPedido.isEmpty()){
-			return listaPedido;
-		}else{
-			throw new ListaPedidoVaziaException();
-		}
+	public ArrayList<Pedido> listar(){
+		return listaPedido;
 	}
 
 	

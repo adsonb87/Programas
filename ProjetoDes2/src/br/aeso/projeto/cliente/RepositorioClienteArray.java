@@ -15,79 +15,64 @@ public class RepositorioClienteArray implements IRepositorioCliente{
 	}
 	
 	@Override
-	public void cadastrar(Cliente cliente)throws ClienteNaoEncontradoException {
-		if(cliente.getCodigoCliente() != null){
+	public void cadastrar(Cliente cliente){
+		if(!existe(cliente.getCodigoCliente())){
 			listaCliente.add(cliente);
-		}else{
-			throw new ClienteNaoEncontradoException();
 		}
 	}
 
 	@Override
-	public void atualizar(Cliente cliente)throws CodigoInexistenteException{
-		if(cliente.getCodigoCliente() != null){
+	public void atualizar(Cliente cliente){
+		if(existe(cliente.getCodigoCliente())){
 			for(int i=0; i<listaCliente.size();i++){
 				if(listaCliente.get(i).getCodigoCliente().equals(cliente.getCodigoCliente())){
-					listaCliente.get(i).setCodigoCliente(cliente.getCodigoCliente());
-					listaCliente.get(i).setNome(cliente.getNome());
-					listaCliente.get(i).setEndereco(cliente.getEndereco());
-					listaCliente.get(i).setTelefone(cliente.getTelefone());
+					listaCliente.set(i, cliente);
+//					listaCliente.get(i).setCodigoCliente(cliente.getCodigoCliente());
+//					listaCliente.get(i).setNome(cliente.getNome());
+//					listaCliente.get(i).setEndereco(cliente.getEndereco());
+//					listaCliente.get(i).setTelefone(cliente.getTelefone());
 				}
 			}
-		}else{
-			throw new CodigoInexistenteException();
 		}
 	}
 
 	@Override
-	public boolean remover(Cliente cliente)throws ClienteNaoEncontradoException {
-		if(cliente.getCodigoCliente() != null){
-			if(listaCliente.contains(cliente)){
-				listaCliente.remove(cliente);
-				return true;
-			}else{
-				return false;
-			}
+	public boolean remover(Cliente cliente){
+		if(existe(cliente.getCodigoCliente())){
+			listaCliente.remove(cliente);
+			return true;
 		}else{
-			throw new ClienteNaoEncontradoException();
+			return false;
 		}
 	}
 
 	@Override
-	public Cliente procurar(String codigo)throws CodigoInexistenteException {
-		if(codigo != null){
+	public Cliente procurar(String codigo){
+		if(existe(codigo)){
 			for(int i=0; i<listaCliente.size();i++){
 				if(listaCliente.get(i).getCodigoCliente().equals(codigo)){
 					return listaCliente.get(i);
 				}
 			}
-			return null;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return null;
 	}
 
 	@Override
-	public boolean existe(String codigo) throws CodigoInexistenteException{
+	public boolean existe(String codigo){
 		if(codigo != null){
 			for(int i=0;i<listaCliente.size();i++){
 				if(listaCliente.get(i).getCodigoCliente().equals(codigo)){
 					return true;
 				}
 			}
-			return false;
-		}else{
-			throw new CodigoInexistenteException();
 		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<Cliente> listar() throws ListaClienteVaziaException{
-		if(!listaCliente.isEmpty()){
-			return listaCliente;
-		}else{
-			throw new ListaClienteVaziaException();
-		}
+	public ArrayList<Cliente> listar(){
+		return listaCliente;
 	}
 	
 

@@ -62,8 +62,8 @@ public class Fachada {
 	public void atualizarCliente (Cliente cliente) throws CodigoInexistenteException {
 		controladorCliente.atualizarCliente(cliente);
 	}
-	public boolean removerCliente (String codigo) throws ClienteNaoEncontradoException, CodigoInexistenteException {
-		if(codigo != null){
+	public boolean removerCliente (String codigo) throws CodigoInexistenteException {
+		if(procurarCliente(codigo) != null){
 			controladorCliente.removerCliente(codigo);
 			return true;
 		}else{
@@ -74,7 +74,7 @@ public class Fachada {
 		return controladorCliente.procurarCliente(codigo);
 	}
 	
-	public ArrayList<Cliente> listarCliente() throws ListaClienteVaziaException{
+	public ArrayList<Cliente> listarCliente(){
 		return controladorCliente.listarCliente();
 	}
 	
@@ -87,8 +87,8 @@ public class Fachada {
 		controladorFornecedor.atualizarFornecedor(fornecedor);
 	}
 	
-	public boolean removerFornecedor(String codigo) throws CodigoInexistenteException, FornecedorNaoEncontradoException{
-		if(codigo != null){
+	public boolean removerFornecedor(String codigo) throws CodigoInexistenteException{
+		if(procurarFornecedor(codigo) != null){
 			controladorFornecedor.removerFornecedor(codigo);
 			return true;
 		}else{
@@ -100,7 +100,7 @@ public class Fachada {
 		return controladorFornecedor.procurarFornecedor(codigo);
 	}
 	
-	public ArrayList<Fornecedor> listarFornecedor() throws ListaFornecedorVaziaException{
+	public ArrayList<Fornecedor> listarFornecedor(){
 		return controladorFornecedor.listarFornecedor();
 	}
 	
@@ -113,8 +113,8 @@ public class Fachada {
 		controladorProduto.atualizarProduto(produto);
 	}
 	
-	public boolean removerProduto(String codigo) throws CodigoInexistenteException, ProdutoNaoEncontradoException{
-		if(codigo != null){
+	public boolean removerProduto(String codigo) throws CodigoInexistenteException{
+		if(procurarPedido(codigo)!=null){
 			controladorProduto.removerProduto(codigo);
 			return true;
 		}else{
@@ -126,7 +126,7 @@ public class Fachada {
 		return controladorProduto.procurarProduto(codigo);
 	}
 	
-	public ArrayList<Produto> listarProduto() throws ListaProdutoVaziaException{
+	public ArrayList<Produto> listarProduto(){
 		return controladorProduto.listarProduto();
 	}
 	
@@ -139,8 +139,8 @@ public class Fachada {
 		controladorVendedor.atualizarVendedor(vendedor);
 	}
 	
-	public boolean removerVendedor(String codigo) throws VendedorNaoEncontradoException, CodigoInexistenteException{
-		if( codigo != null){
+	public boolean removerVendedor(String codigo) throws CodigoInexistenteException{
+		if(procurarVendedor(codigo)!=null){
 			controladorVendedor.removerVendedor(codigo);
 			return true;
 		}else{
@@ -152,7 +152,7 @@ public class Fachada {
 		return controladorVendedor.procurarVendedor(codigo);
 	}
 	
-	public ArrayList<Vendedor> listarVendedor() throws ListaVendedorVaziaException{
+	public ArrayList<Vendedor> listarVendedor(){
 		return controladorVendedor.listarVendedor();
 	}
 	
@@ -165,8 +165,8 @@ public class Fachada {
 		controladorPedido.atualizarPedido(pedido);
 	}
 	
-	public boolean removerPedido(String codigo) throws CodigoInexistenteException, PedidoNaoEncontradoException{
-		if(codigo != null){
+	public boolean removerPedido(String codigo) throws CodigoInexistenteException{
+		if(procurarPedido(codigo)!=null){
 			controladorPedido.removerPedido(codigo);
 			return true;
 		}else{
@@ -178,7 +178,7 @@ public class Fachada {
 		return controladorPedido.procurarPedido(codigo);
 	}
 	
-	public ArrayList<Pedido> listarPedido() throws ListaPedidoVaziaException{
+	public ArrayList<Pedido> listarPedido(){
 		return controladorPedido.listarPedido();
 	}
 	
@@ -191,8 +191,8 @@ public class Fachada {
 		controladorNotafiscal.atualizarNotaFiscal(notaFiscal);
 	}
 	
-	public boolean removerNotaFiscal (String codigo) throws NotaFiscalNaoEncontradaException, CodigoInexistenteException{
-		if(codigo != null){
+	public boolean removerNotaFiscal (String codigo) throws CodigoInexistenteException{
+		if(procurarNotaFiscal(codigo)!=null){
 			controladorNotafiscal.removerNotaFiscal(codigo);
 			return true;
 		}else{
@@ -204,7 +204,7 @@ public class Fachada {
 		return controladorNotafiscal.procurarNotaFiscal(codigo);
 	}
 	
-	public ArrayList<NotaFiscal> listarNotaFiscal() throws ListaNotaFiscalNaoEncontradaException{
+	public ArrayList<NotaFiscal> listarNotaFiscal(){
 		return controladorNotafiscal.listarNotaFiscal();
 	}
 }

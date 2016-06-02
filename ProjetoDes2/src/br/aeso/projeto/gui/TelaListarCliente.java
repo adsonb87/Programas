@@ -2,6 +2,7 @@ package br.aeso.projeto.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -29,14 +30,7 @@ public class TelaListarCliente extends JPanel {
 		JButton listarClientesBTN = new JButton("Listar Clientes");
 		listarClientesBTN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Fachada fachada = Fachada.getInstance();
-				try {
-					ArrayList<Cliente> lista = fachada.listarCliente();
-					listarClientesTP.setText(lista.toString());
-				} catch (ListaClienteVaziaException e1) {
-					JOptionPane.showInputDialog(e1.getMessage());
-				}
-				
+				listarCliente(listarClientesTP);
 			}
 		});
 		
@@ -66,5 +60,14 @@ public class TelaListarCliente extends JPanel {
 		setLayout(groupLayout);
 
 	}
-
+	
+	private void listarCliente(JTextPane listar){
+		Fachada fachada = Fachada.getInstance();
+		ArrayList<Cliente> lista = fachada.listarCliente();
+		if(!lista.isEmpty()){
+			listar.setText(lista.toString());
+		}else{
+			listar.setText("Não há clientes para serem listados");
+		}
+	}
 }

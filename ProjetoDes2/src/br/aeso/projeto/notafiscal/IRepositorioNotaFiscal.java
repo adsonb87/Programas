@@ -7,10 +7,10 @@ import br.aeso.projeto.util.ListaNotaFiscalNaoEncontradaException;
 import br.aeso.projeto.util.NotaFiscalNaoEncontradaException;
 
 public interface IRepositorioNotaFiscal {
-	public void cadastrar (NotaFiscal notaFiscal) throws NotaFiscalNaoEncontradaException;
-	public void atualizar (NotaFiscal notaFiscal) throws CodigoInexistenteException;
-	public boolean remover (NotaFiscal notaFiscal) throws NotaFiscalNaoEncontradaException;
-	public NotaFiscal procurar (String codigo) throws CodigoInexistenteException;
-	public boolean existe (String codigo) throws CodigoInexistenteException;
-	public ArrayList<NotaFiscal> listar() throws ListaNotaFiscalNaoEncontradaException;
+	public void cadastrar (NotaFiscal notaFiscal);
+	public void atualizar (NotaFiscal notaFiscal);
+	public boolean remover (NotaFiscal notaFiscal);
+	public NotaFiscal procurar (String codigo);
+	public boolean existe (String codigo);
+	public ArrayList<NotaFiscal> listar();
 }

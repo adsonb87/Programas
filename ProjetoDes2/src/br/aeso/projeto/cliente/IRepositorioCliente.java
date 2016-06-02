@@ -8,10 +8,10 @@ import br.aeso.projeto.util.ListaClienteVaziaException;
 
 public interface IRepositorioCliente {
 	
-	public void cadastrar (Cliente cliente) throws ClienteNaoEncontradoException;
-	public void atualizar (Cliente cliente) throws CodigoInexistenteException;
-	public boolean remover (Cliente cliente) throws ClienteNaoEncontradoException;
-	public Cliente procurar (String codigo) throws CodigoInexistenteException;
-	public boolean existe (String codigo) throws CodigoInexistenteException;
-	public ArrayList<Cliente> listar() throws ListaClienteVaziaException;
+	public void cadastrar (Cliente cliente);
+	public void atualizar (Cliente cliente);
+	public boolean remover (Cliente cliente);
+	public Cliente procurar (String codigo);
+	public boolean existe (String codigo);
+	public ArrayList<Cliente> listar();
 }
