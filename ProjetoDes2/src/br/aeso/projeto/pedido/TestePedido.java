@@ -24,38 +24,19 @@ public class TestePedido {
 		
 		IRepositorioPedido repositorio = new RepositorioPedidoArray();
 		
-		try {
-			repositorio.cadastrar(pedido);
-			repositorio.cadastrar(pedido2);
-			repositorio.cadastrar(pedido3);
-		} catch (PedidoNaoEncontradoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		repositorio.cadastrar(pedido);
+		repositorio.cadastrar(pedido2);
+		repositorio.cadastrar(pedido3);
 		
-		try {
-			ArrayList<Pedido> lista = repositorio.listar();
-			System.out.println(lista.toString());
-		} catch (ListaPedidoVaziaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ArrayList<Pedido> lista = repositorio.listar();
+		System.out.println(lista.toString());
 		
 		pedido.setQuantidadeProduto(1);
-		try {
-			repositorio.atualizar(pedido);
-		} catch (CodigoInexistenteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		repositorio.atualizar(pedido);
 		
-		try {
-			ArrayList<Pedido> lista = repositorio.listar();
-			System.out.println(lista.toString());
-		} catch (ListaPedidoVaziaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+			ArrayList<Pedido> lista1 = repositorio.listar();
+			System.out.println(lista1.toString());
 		
 	}
 

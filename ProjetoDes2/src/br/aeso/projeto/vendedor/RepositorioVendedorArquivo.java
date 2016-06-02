@@ -23,7 +23,7 @@ public class RepositorioVendedorArquivo implements IRepositorioVendedor{
 	}
 	
 	@Override
-	public void cadastrar(Vendedor vendedor) throws VendedorNaoEncontradoException {
+	public void cadastrar(Vendedor vendedor){
 		if(!this.existe(vendedor.getCodigoVendedor())) {
 			listaVendedor.add(vendedor);
 			gravarArquivoNaMemoria();
@@ -31,46 +31,52 @@ public class RepositorioVendedorArquivo implements IRepositorioVendedor{
 	}
 
 	@Override
-	public void atualizar(Vendedor vendedor) throws CodigoInexistenteException {
+	public void atualizar(Vendedor vendedor){
 		if(this.existe(vendedor.getCodigoVendedor())){
-//			listaVendedor = lerArquivoDaMemoria();
-				for(int i=0;i<listaVendedor.size();i++){
-					if(listaVendedor.get(i).getCodigoVendedor().equals(vendedor.getCodigoVendedor())){
-						listaVendedor.get(i).setCodigoVendedor(vendedor.getCodigoVendedor());
-						listaVendedor.get(i).setNome(vendedor.getNome());
-						listaVendedor.get(i).setEndereco(vendedor.getEndereco());
-						listaVendedor.get(i).setTelefone(vendedor.getTelefone());
-					}
+			for(int i=0;i<listaVendedor.size();i++){
+				if(listaVendedor.get(i).getCodigoVendedor().equals(vendedor.getCodigoVendedor())){
+					listaVendedor.set(i, vendedor);
+//					listaVendedor.get(i).setCodigoVendedor(vendedor.getCodigoVendedor());
+//					listaVendedor.get(i).setNome(vendedor.getNome());
+//					listaVendedor.get(i).setEndereco(vendedor.getEndereco());
+//					listaVendedor.get(i).setTelefone(vendedor.getTelefone());
 				}
+			}
 			gravarArquivoNaMemoria();
 		}
 	}
 
 	@Override
 	public boolean remover(Vendedor vendedor){
-		listaVendedor = lerArquivoDaMemoria();
-		if(listaVendedor.contains(vendedor)){
+//		if(this.existe(vendedor.getCodigoVendedor())){
+//			listaVendedor.remove(vendedor);
+//			gravarArquivoNaMemoria();
+//			return true;
+//		}else{
+//			return false;
+//		}
+		if(vendedor.equals(null)){
+			return false;
+		}else{
 			listaVendedor.remove(vendedor);
 			gravarArquivoNaMemoria();
 			return true;
-		}else{
-			return false;
 		}
+		
 	}
 
 	@Override
 	public Vendedor procurar(String codigo){
-//		if(this.existe(codigo)){
-			listaVendedor = lerArquivoDaMemoria();
-				for(int i=0; i<listaVendedor.size(); i++){
-					if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
-						return listaVendedor.get(i);
-					}
+		if(this.existe(codigo)){
+			for(int i=0; i<listaVendedor.size(); i++){
+				if(listaVendedor.get(i).getCodigoVendedor().equals(codigo)){
+					return listaVendedor.get(i);
 				}
+			}
 			return null;
-//		}else{
-//			return null;	
-//		}
+		}else{
+			return null;	
+		}
 	}
 
 	@Override
@@ -113,11 +119,8 @@ public class RepositorioVendedorArquivo implements IRepositorioVendedor{
 	}
 	
 	public ArrayList<Vendedor> lerArquivoDaMemoria(){
-		
 		ArrayList<Vendedor> listaMemoria = new ArrayList<>();
-		
 		FileInputStream fis;
-		
 		try {
 			fis = new FileInputStream("C:/Users/adson_000/Desktop/temp/listaVendedor.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);

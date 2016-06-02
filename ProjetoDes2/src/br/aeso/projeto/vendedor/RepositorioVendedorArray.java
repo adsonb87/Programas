@@ -17,7 +17,7 @@ public class RepositorioVendedorArray implements IRepositorioVendedor{
 	
 	@Override
 	public void cadastrar(Vendedor vendedor){
-		if(existe(vendedor.getCodigoVendedor())){
+		if(!existe(vendedor.getCodigoVendedor())){
 			listaVendedor.add(vendedor);
 		}
 	}

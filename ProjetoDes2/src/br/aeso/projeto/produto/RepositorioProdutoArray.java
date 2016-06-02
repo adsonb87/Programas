@@ -17,7 +17,7 @@ public class RepositorioProdutoArray implements IRepositorioProduto{
 	
 	@Override
 	public void cadastrar(Produto produto){
-		if(existe(produto.getCodigoProduto())){
+		if(!existe(produto.getCodigoProduto())){
 			listaProduto.add(produto);
 		}
 	}

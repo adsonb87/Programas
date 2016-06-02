@@ -13,77 +13,15 @@ public class TesteVendedorArquivo {
 		Vendedor vendedor;
 		IRepositorioVendedor repositorio = new RepositorioVendedorArquivo();
 		
-		vendedor = new Vendedor("01", "Adson", "endereco", "telefone");
+		vendedor = new Vendedor("03", "Adson", "endereco", "telefone");
 		
-//		try {
-//			repositorio.cadastrar(vendedor);
-//		} catch (VendedorNaoEncontradoException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		vendedor = new Vendedor("02", "Pita", "endereco", "telefone");
-//		
-//		try {
-//			repositorio.cadastrar(vendedor);
-//		} catch (VendedorNaoEncontradoException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		try {
-//			ArrayList<Vendedor> lista = repositorio.listar();
-//			System.out.println("Listar: "+lista.toString());
-//		} catch (ListaVendedorVaziaException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		
-//		try {
-//			System.out.println("Procurar: "+repositorio.procurar("02").toString());
-//		} catch (CodigoInexistenteException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		
-//		
+//		repositorio.cadastrar(vendedor);
+		
+		repositorio.remover(repositorio.procurar("03"));
+		
+		System.out.println(repositorio.listar());
 		
 		
-		
-			try {
-				System.out.println("Remover: "+repositorio.remover(repositorio.procurar("01")));
-			} catch (VendedorNaoEncontradoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (CodigoInexistenteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-		
-//		
-//
-//		
-//		vendedor = new Vendedor("02", "Adelio", "endereco", "telefone");
-//		
-//		try {
-//			repositorio.atualizar(vendedor);
-//		} catch (CodigoInexistenteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		try {
-			ArrayList<Vendedor> lista = repositorio.listar();
-			System.out.println("Listar: "+lista.toString());
-		} catch (ListaVendedorVaziaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
