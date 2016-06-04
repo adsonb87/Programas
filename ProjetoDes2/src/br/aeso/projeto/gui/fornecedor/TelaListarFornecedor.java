@@ -64,7 +64,7 @@ public class TelaListarFornecedor extends JPanel {
 		if(!lista.isEmpty()){
 			textPane.setText(lista.toString());
 		}else{
-			textPane.setText("Não há clientes para serem listados");
+			textPane.setText("Não há fornecedores para serem listados");
 		}
 	}
 }
