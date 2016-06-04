@@ -1,4 +1,4 @@
-package br.aeso.projeto.gui;
+package br.aeso.projeto.gui.cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 import br.aeso.projeto.cliente.Cliente;
 import br.aeso.projeto.fachada.Fachada;
 import br.aeso.projeto.util.ListaClienteVaziaException;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class TelaListarCliente extends JPanel {
 
@@ -26,6 +27,7 @@ public class TelaListarCliente extends JPanel {
 		setBorder(new TitledBorder(null, "Listar Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		JTextPane listarClientesTP = new JTextPane();
+		listarClientesTP.setEditable(false);
 		
 		JButton listarClientesBTN = new JButton("Listar Clientes");
 		listarClientesBTN.addActionListener(new ActionListener() {
@@ -39,13 +41,13 @@ public class TelaListarCliente extends JPanel {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(279)
 							.addComponent(listarClientesBTN))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(listarClientesTP, GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)))
+							.addComponent(listarClientesTP, GroupLayout.PREFERRED_SIZE, 688, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -53,8 +55,8 @@ public class TelaListarCliente extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(listarClientesBTN)
-					.addGap(18)
-					.addComponent(listarClientesTP, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+					.addComponent(listarClientesTP, GroupLayout.PREFERRED_SIZE, 364, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		setLayout(groupLayout);

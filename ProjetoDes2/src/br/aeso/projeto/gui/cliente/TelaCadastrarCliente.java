@@ -1,4 +1,4 @@
-package br.aeso.projeto.gui;
+package br.aeso.projeto.gui.cliente;
 
 import java.awt.JobAttributes;
 import java.awt.event.ActionEvent;
@@ -21,8 +21,10 @@ import br.aeso.projeto.fachada.Fachada;
 import br.aeso.projeto.fornecedor.Fornecedor;
 import br.aeso.projeto.util.ClienteNaoEncontradoException;
 import br.aeso.projeto.util.ListaClienteVaziaException;
+import javax.swing.UIManager;
+import java.awt.Color;
 
-public class TelaAdicionarCliente extends JPanel {
+public class TelaCadastrarCliente extends JPanel {
 	private JTextField nomeTF;
 	private JTextField enderecoTF;
 	private JTextField telefoneTF;
@@ -31,8 +33,8 @@ public class TelaAdicionarCliente extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TelaAdicionarCliente(){
-		setBorder(new TitledBorder(null, "Adicionar Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	public TelaCadastrarCliente(){
+		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Cadastrar Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		JLabel lblCodigo = new JLabel("Codigo");
 		

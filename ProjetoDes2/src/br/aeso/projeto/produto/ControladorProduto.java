@@ -15,7 +15,7 @@ public class ControladorProduto {
 	}
 	
 	public void cadastrarProduto(Produto produto) throws ProdutoNaoEncontradoException{
-		if(produto.getCodigoProduto()!=null){
+		if(produto.getCodigoProduto() != null){
 			repositorioProduto.cadastrar(produto);
 		}else{
 			throw new ProdutoNaoEncontradoException();

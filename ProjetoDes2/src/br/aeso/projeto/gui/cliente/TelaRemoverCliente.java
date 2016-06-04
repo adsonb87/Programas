@@ -1,4 +1,4 @@
-package br.aeso.projeto.gui;
+package br.aeso.projeto.gui.cliente;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;

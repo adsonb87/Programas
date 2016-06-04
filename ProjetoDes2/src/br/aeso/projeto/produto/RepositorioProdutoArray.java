@@ -2,11 +2,6 @@ package br.aeso.projeto.produto;
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaFornecedorVaziaException;
-import br.aeso.projeto.util.ListaProdutoVaziaException;
-import br.aeso.projeto.util.ProdutoNaoEncontradoException;
-
 public class RepositorioProdutoArray implements IRepositorioProduto{
 	
 	private ArrayList<Produto> listaProduto;
@@ -61,8 +56,8 @@ public class RepositorioProdutoArray implements IRepositorioProduto{
 
 	@Override
 	public boolean existe(String codigo){
-		if(codigo != null){
-			for(int i=0;i<listaProduto.size();i++){
+		if(!codigo.equals(null)){
+			for(int i=0; i<listaProduto.size();i++){
 				if(listaProduto.get(i).getCodigoProduto().equals(codigo)){
 					return true;
 				}

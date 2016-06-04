@@ -1,4 +1,4 @@
-package br.aeso.projeto.gui;
+package br.aeso.projeto.gui.cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -63,7 +63,7 @@ public class Fachada {
 		controladorCliente.atualizarCliente(cliente);
 	}
 	public boolean removerCliente (String codigo) throws CodigoInexistenteException {
-		if(procurarCliente(codigo) != null){
+		if(codigo !=null){
 			controladorCliente.removerCliente(codigo);
 			return true;
 		}else{
@@ -88,7 +88,7 @@ public class Fachada {
 	}
 	
 	public boolean removerFornecedor(String codigo) throws CodigoInexistenteException{
-		if(procurarFornecedor(codigo) != null){
+		if(codigo !=null){
 			controladorFornecedor.removerFornecedor(codigo);
 			return true;
 		}else{
@@ -114,7 +114,7 @@ public class Fachada {
 	}
 	
 	public boolean removerProduto(String codigo) throws CodigoInexistenteException{
-		if(procurarPedido(codigo)!=null){
+		if(codigo !=null){
 			controladorProduto.removerProduto(codigo);
 			return true;
 		}else{
@@ -140,7 +140,7 @@ public class Fachada {
 	}
 	
 	public boolean removerVendedor(String codigo) throws CodigoInexistenteException{
-		if(procurarVendedor(codigo)!=null){
+		if(codigo !=null){
 			controladorVendedor.removerVendedor(codigo);
 			return true;
 		}else{
@@ -166,7 +166,7 @@ public class Fachada {
 	}
 	
 	public boolean removerPedido(String codigo) throws CodigoInexistenteException{
-		if(procurarPedido(codigo)!=null){
+		if(codigo !=null){
 			controladorPedido.removerPedido(codigo);
 			return true;
 		}else{
@@ -192,7 +192,7 @@ public class Fachada {
 	}
 	
 	public boolean removerNotaFiscal (String codigo) throws CodigoInexistenteException{
-		if(procurarNotaFiscal(codigo)!=null){
+		if(codigo !=null){
 			controladorNotafiscal.removerNotaFiscal(codigo);
 			return true;
 		}else{
