@@ -1,22 +1,22 @@
 package br.aeso.projeto.gui.notafiscal;
 
-import javax.swing.JPanel;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import br.aeso.projeto.fachada.Fachada;
 import br.aeso.projeto.notafiscal.NotaFiscal;
+import br.aeso.projeto.pedido.Pedido;
 import br.aeso.projeto.util.CodigoInexistenteException;
 import br.aeso.projeto.util.NotaFiscalNaoEncontradaException;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 public class TelaCadastrarNota extends JPanel {
 	private JTextField codigoNFTF;
@@ -93,14 +93,38 @@ public class TelaCadastrarNota extends JPanel {
 
 	}
 	
+//	private void cadastrarNotaFiscal(){
+//		Fachada fachada = Fachada.getInstance();
+//		try {
+//			fachada.cadastrarNotaFiscal(new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText())));
+//			limparCampos();
+//		} catch (NotaFiscalNaoEncontradaException | CodigoInexistenteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
 	private void cadastrarNotaFiscal(){
 		Fachada fachada = Fachada.getInstance();
 		try {
-			fachada.cadastrarNotaFiscal(new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText())));
+			NotaFiscal notaFiscal = new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
+			adicionarPedidos(notaFiscal);
+			fachada.cadastrarNotaFiscal(notaFiscal);
 			limparCampos();
 		} catch (NotaFiscalNaoEncontradaException | CodigoInexistenteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	private void adicionarPedidos(NotaFiscal nota){
+		Fachada fachada = Fachada.getInstance();
+		ArrayList<Pedido> listaPedidos = fachada.listarPedido();
+		
+		for(int i=0;i<listaPedidos.size();i++){
+			if(listaPedidos.get(i).getNotaFiscal().getCodigoNotaFiscal().equals(nota.getCodigoNotaFiscal())){
+				nota.adicionarPedido(listaPedidos.get(i));
+			}
 		}
 	}
 	

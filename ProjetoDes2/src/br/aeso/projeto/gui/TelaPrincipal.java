@@ -24,6 +24,7 @@ import br.aeso.projeto.gui.notafiscal.TelaCadastrarNota;
 import br.aeso.projeto.gui.notafiscal.TelaListarNota;
 import br.aeso.projeto.gui.notafiscal.TelaProcurarNota;
 import br.aeso.projeto.gui.notafiscal.TelaRemoverNota;
+import br.aeso.projeto.gui.pedido.TelaAtualizarPedido;
 import br.aeso.projeto.gui.pedido.TelaCadastrarPedido;
 import br.aeso.projeto.gui.pedido.TelaListarPedido;
 import br.aeso.projeto.gui.pedido.TelaProcurarPedido;
@@ -307,8 +308,8 @@ public class TelaPrincipal {
 		JMenuItem atualizarPedidoMN = new JMenuItem("Atualizar");
 		atualizarPedidoMN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastrarPedido telaCPedido = new TelaCadastrarPedido();
-				frame.setContentPane(telaCPedido);
+				TelaAtualizarPedido telaAPedido = new TelaAtualizarPedido();
+				frame.setContentPane(telaAPedido);
 				frame.getContentPane().revalidate();
 			}
 		});

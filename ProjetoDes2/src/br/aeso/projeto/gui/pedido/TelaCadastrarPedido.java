@@ -1,6 +1,15 @@
 package br.aeso.projeto.gui.pedido;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import br.aeso.projeto.fachada.Fachada;
@@ -9,14 +18,6 @@ import br.aeso.projeto.pedido.Pedido;
 import br.aeso.projeto.util.CodigoInexistenteException;
 import br.aeso.projeto.util.NotaFiscalNaoEncontradaException;
 import br.aeso.projeto.util.PedidoNaoEncontradoException;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaCadastrarPedido extends JPanel {
 	private JTextField codigoNFTF;
@@ -144,10 +145,25 @@ public class TelaCadastrarPedido extends JPanel {
 
 	}
 	
+//	private void cadastrarPedido(){
+//		Fachada fachada = Fachada.getInstance();
+//		try {
+//			NotaFiscal notaFiscal = new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
+//			fachada.cadastrarNotaFiscal(notaFiscal);
+//			Pedido pedido = new Pedido(notaFiscal, codigoPedidoTF.getText(), fachada.procurarProduto(codigoProdutoTF.getText()), Double.parseDouble(quantidadeTF.getText().replaceAll(",","."))); 
+//			fachada.cadastrarPedido(pedido);
+//			notaFiscal.adicionarPedido(pedido);
+//			limparCamposAdicionar();
+//		} catch (CodigoInexistenteException | NotaFiscalNaoEncontradaException | NumberFormatException | PedidoNaoEncontradoException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//	}
+	
 	private void cadastrarPedido(){
 		Fachada fachada = Fachada.getInstance();
 		try {
-			NotaFiscal notaFiscal = new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
+			NotaFiscal notaFiscal = inicializarNotaFiscal();
 			fachada.cadastrarNotaFiscal(notaFiscal);
 			Pedido pedido = new Pedido(notaFiscal, codigoPedidoTF.getText(), fachada.procurarProduto(codigoProdutoTF.getText()), Double.parseDouble(quantidadeTF.getText().replaceAll(",","."))); 
 			fachada.cadastrarPedido(pedido);
@@ -158,6 +174,24 @@ public class TelaCadastrarPedido extends JPanel {
 			e1.printStackTrace();
 		}
 	}
+	
+	private NotaFiscal inicializarNotaFiscal(){
+		Fachada fachada = Fachada.getInstance();
+		ArrayList<NotaFiscal> lista = fachada.listarNotaFiscal();
+		for(int i=0; i<lista.size();i++){
+			if(lista.get(i).getCodigoNotaFiscal().equals(codigoNFTF.getText())){
+				return lista.get(i);
+			}
+		}
+		try {
+			return new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
+		} catch (CodigoInexistenteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	private void limparCamposAdicionar(){
 		codigoPedidoTF.setText("");
