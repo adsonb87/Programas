@@ -40,11 +40,26 @@ public class TesteNfPedido {
 		rNota.procurar("1").adicionarPedido(pedido);
 		rPedido.cadastrar(pedido);
 		
-		pedido = new Pedido(rNota.procurar("2"), "2", rProduto.procurar("02"), 10);
-		rNota.procurar("2").adicionarPedido(pedido);
+		pedido = new Pedido(rNota.procurar("1"), "2", rProduto.procurar("02"), 10);
+		rNota.procurar("1").adicionarPedido(pedido);
 		rPedido.cadastrar(pedido);
 		
 		System.out.println(rNota.procurar("1").toString());
+		
+		int cont=0;
+		
+		for(int i=0; i<rNota.listar().size();i++){
+			
+			if(rNota.listar().get(i).getCliente().getCodigoCliente().equals("01")){
+				cont++;
+			}
+		}
+		 	cont++;
+		
+		String a = Integer.toString(cont);
+
+		
+		System.out.println("GErador: "+rNota.procurar("1").getCliente().getCodigoCliente().concat(a));
 		
 		
 		

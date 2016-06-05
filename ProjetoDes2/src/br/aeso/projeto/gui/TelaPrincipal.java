@@ -19,6 +19,8 @@ import br.aeso.projeto.gui.fornecedor.TelaCadastrarFornecedor;
 import br.aeso.projeto.gui.fornecedor.TelaListarFornecedor;
 import br.aeso.projeto.gui.fornecedor.TelaProcurarFornecedor;
 import br.aeso.projeto.gui.fornecedor.TelaRemoverFornecedor;
+import br.aeso.projeto.gui.pedido.TelaCadastrarPedido;
+import br.aeso.projeto.gui.pedido.TelaListarPedido;
 import br.aeso.projeto.gui.produto.TelaAtualizarProduto;
 import br.aeso.projeto.gui.produto.TelaCadastrarProduto;
 import br.aeso.projeto.gui.produto.TelaListarProduto;
@@ -286,6 +288,13 @@ public class TelaPrincipal {
 		menuBar.add(mnPedido);
 		
 		JMenuItem cadastrarPedidoMN = new JMenuItem("Cadastrar");
+		cadastrarPedidoMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastrarPedido telaCPedido = new TelaCadastrarPedido();
+				frame.setContentPane(telaCPedido);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnPedido.add(cadastrarPedidoMN);
 		
 		JMenuItem atualizarPedidoMN = new JMenuItem("Atualizar");
@@ -298,6 +307,13 @@ public class TelaPrincipal {
 		mnPedido.add(procurarPedidoMN);
 		
 		JMenuItem listarPedidoMN = new JMenuItem("Listar");
+		listarPedidoMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListarPedido telaLPedido = new TelaListarPedido();
+				frame.setContentPane(telaLPedido);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnPedido.add(listarPedidoMN);
 		
 		JMenu mnNotaFiscal = new JMenu("Nota Fiscal");
