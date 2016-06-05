@@ -65,21 +65,7 @@ public class TelaCadastrarPedido extends JPanel {
 		JButton btnAdicionarPedido = new JButton("Adicionar Pedido");
 		btnAdicionarPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Fachada fachada = Fachada.getInstance();
-				
-				try {
-					NotaFiscal notaFiscal = new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
-					fachada.cadastrarNotaFiscal(notaFiscal);
-					Pedido pedido = new Pedido(notaFiscal, codigoPedidoTF.getText(), fachada.procurarProduto(codigoProdutoTF.getText()), Double.parseDouble(quantidadeTF.getText().replaceAll(",","."))); 
-					fachada.cadastrarPedido(pedido);
-					notaFiscal.adicionarPedido(pedido);
-					limparCamposAdicionar();
-				} catch (CodigoInexistenteException | NotaFiscalNaoEncontradaException | NumberFormatException | PedidoNaoEncontradoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
+				cadastrarPedido();
 			}
 		});
 		
@@ -157,11 +143,28 @@ public class TelaCadastrarPedido extends JPanel {
 		setLayout(groupLayout);
 
 	}
+	
+	private void cadastrarPedido(){
+		Fachada fachada = Fachada.getInstance();
+		try {
+			NotaFiscal notaFiscal = new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
+			fachada.cadastrarNotaFiscal(notaFiscal);
+			Pedido pedido = new Pedido(notaFiscal, codigoPedidoTF.getText(), fachada.procurarProduto(codigoProdutoTF.getText()), Double.parseDouble(quantidadeTF.getText().replaceAll(",","."))); 
+			fachada.cadastrarPedido(pedido);
+			notaFiscal.adicionarPedido(pedido);
+			limparCamposAdicionar();
+		} catch (CodigoInexistenteException | NotaFiscalNaoEncontradaException | NumberFormatException | PedidoNaoEncontradoException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
 	private void limparCamposAdicionar(){
 		codigoPedidoTF.setText("");
 		codigoProdutoTF.setText("");
 		quantidadeTF.setText("");
 	}
+	
 	private void limparCampos(){
 		codigoNFTF.setText("");
 		codigoClienteTF.setText("");

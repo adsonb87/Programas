@@ -19,8 +19,15 @@ import br.aeso.projeto.gui.fornecedor.TelaCadastrarFornecedor;
 import br.aeso.projeto.gui.fornecedor.TelaListarFornecedor;
 import br.aeso.projeto.gui.fornecedor.TelaProcurarFornecedor;
 import br.aeso.projeto.gui.fornecedor.TelaRemoverFornecedor;
+import br.aeso.projeto.gui.notafiscal.TelaAtualizarNota;
+import br.aeso.projeto.gui.notafiscal.TelaCadastrarNota;
+import br.aeso.projeto.gui.notafiscal.TelaListarNota;
+import br.aeso.projeto.gui.notafiscal.TelaProcurarNota;
+import br.aeso.projeto.gui.notafiscal.TelaRemoverNota;
 import br.aeso.projeto.gui.pedido.TelaCadastrarPedido;
 import br.aeso.projeto.gui.pedido.TelaListarPedido;
+import br.aeso.projeto.gui.pedido.TelaProcurarPedido;
+import br.aeso.projeto.gui.pedido.TelaRemoverPedido;
 import br.aeso.projeto.gui.produto.TelaAtualizarProduto;
 import br.aeso.projeto.gui.produto.TelaCadastrarProduto;
 import br.aeso.projeto.gui.produto.TelaListarProduto;
@@ -298,12 +305,33 @@ public class TelaPrincipal {
 		mnPedido.add(cadastrarPedidoMN);
 		
 		JMenuItem atualizarPedidoMN = new JMenuItem("Atualizar");
+		atualizarPedidoMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastrarPedido telaCPedido = new TelaCadastrarPedido();
+				frame.setContentPane(telaCPedido);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnPedido.add(atualizarPedidoMN);
 		
 		JMenuItem removerPedidoMN = new JMenuItem("Remover");
+		removerPedidoMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaRemoverPedido telaRPedido = new TelaRemoverPedido();
+				frame.setContentPane(telaRPedido);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnPedido.add(removerPedidoMN);
 		
 		JMenuItem procurarPedidoMN = new JMenuItem("Procurar");
+		procurarPedidoMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaProcurarPedido telaPPedido = new TelaProcurarPedido();
+				frame.setContentPane(telaPPedido);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnPedido.add(procurarPedidoMN);
 		
 		JMenuItem listarPedidoMN = new JMenuItem("Listar");
@@ -320,18 +348,53 @@ public class TelaPrincipal {
 		menuBar.add(mnNotaFiscal);
 		
 		JMenuItem cadastrarNFMN = new JMenuItem("Cadastrar");
+		cadastrarNFMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastrarNota telaCNota = new TelaCadastrarNota();
+				frame.setContentPane(telaCNota);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnNotaFiscal.add(cadastrarNFMN);
 		
 		JMenuItem atualizarNFMN = new JMenuItem("Atualizar");
+		atualizarNFMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaAtualizarNota telaANota = new TelaAtualizarNota();
+				frame.setContentPane(telaANota);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnNotaFiscal.add(atualizarNFMN);
 		
 		JMenuItem removerNFMN = new JMenuItem("Remover");
+		removerNFMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaRemoverNota telaRNota = new TelaRemoverNota();
+				frame.setContentPane(telaRNota);
+				frame.getContentPane().revalidate();				
+			}
+		});
 		mnNotaFiscal.add(removerNFMN);
 		
 		JMenuItem procurarNFMN = new JMenuItem("Procurar");
+		procurarNFMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaProcurarNota telaPNota = new TelaProcurarNota();
+				frame.setContentPane(telaPNota);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnNotaFiscal.add(procurarNFMN);
 		
 		JMenuItem listarNFMN = new JMenuItem("Listar");
+		listarNFMN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListarNota telaLNota = new TelaListarNota();
+				frame.setContentPane(telaLNota);
+				frame.getContentPane().revalidate();
+			}
+		});
 		mnNotaFiscal.add(listarNFMN);
 		
 		JMenuItem mntmEmitirNota = new JMenuItem("Emitir Nota");
