@@ -164,12 +164,12 @@ public class TelaCadastrarPedido extends JPanel {
 		Fachada fachada = Fachada.getInstance();
 		try {
 			NotaFiscal notaFiscal = inicializarNotaFiscal();
-			fachada.cadastrarNotaFiscal(notaFiscal);
+//			fachada.cadastrarNotaFiscal(notaFiscal);
 			Pedido pedido = new Pedido(notaFiscal, codigoPedidoTF.getText(), fachada.procurarProduto(codigoProdutoTF.getText()), Double.parseDouble(quantidadeTF.getText().replaceAll(",","."))); 
 			fachada.cadastrarPedido(pedido);
 			notaFiscal.adicionarPedido(pedido);
 			limparCamposAdicionar();
-		} catch (CodigoInexistenteException | NotaFiscalNaoEncontradaException | NumberFormatException | PedidoNaoEncontradoException e1) {
+		} catch (CodigoInexistenteException | NumberFormatException | PedidoNaoEncontradoException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -184,8 +184,13 @@ public class TelaCadastrarPedido extends JPanel {
 			}
 		}
 		try {
-			return new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
+			NotaFiscal notaFiscal = new NotaFiscal(codigoNFTF.getText(), fachada.procurarCliente(codigoClienteTF.getText()), fachada.procurarVendedor(codigoVendedorTF.getText()));
+			fachada.cadastrarNotaFiscal(notaFiscal);
+			return notaFiscal;
 		} catch (CodigoInexistenteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotaFiscalNaoEncontradaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

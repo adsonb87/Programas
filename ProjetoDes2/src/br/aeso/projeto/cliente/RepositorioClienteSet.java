@@ -5,10 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import br.aeso.projeto.util.ClienteNaoEncontradoException;
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaClienteVaziaException;
-
 public class RepositorioClienteSet implements IRepositorioCliente{
 
 	Set<Cliente> listaCliente;

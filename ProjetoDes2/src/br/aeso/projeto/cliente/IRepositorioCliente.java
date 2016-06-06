@@ -2,10 +2,6 @@ package br.aeso.projeto.cliente;
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.util.ClienteNaoEncontradoException;
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaClienteVaziaException;
-
 public interface IRepositorioCliente {
 	
 	public void cadastrar (Cliente cliente);

@@ -62,8 +62,8 @@ public class NotaFiscal {
 
 	@Override
 	public String toString() {
-		return "NotaFiscal [codigoNotaFiscal=" + codigoNotaFiscal + "\n cliente=" + cliente.getCodigoCliente() + " - "+cliente.getNome()+"\n pedidos= \n" + pedidos.toString()
-		+ "valorTotalDaNota= "+getValorTotalNotaFiscal()+"\n vendedor=" + vendedor.getCodigoVendedor()+" - " +vendedor.getNome()+ "]";
+		return "NotaFiscal\nCodigo: " + codigoNotaFiscal + "\nCliente: " + cliente.getCodigoCliente() + " - "+cliente.getNome()+"\nPedidos:\n" + pedidos.toString()
+		+ "\nValor Total Da Nota: "+getValorTotalNotaFiscal()+"\nVendedor: " + vendedor.getCodigoVendedor()+" - " +vendedor.getNome()+ "\n-----\n";
 	}
 	
 	

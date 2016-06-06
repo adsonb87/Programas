@@ -2,10 +2,6 @@ package br.aeso.projeto.notafiscal;
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaNotaFiscalNaoEncontradaException;
-import br.aeso.projeto.util.NotaFiscalNaoEncontradaException;
-
 public class RepositorioNotaFiscalArray implements IRepositorioNotaFiscal{
 	
 	private ArrayList<NotaFiscal> listaNotaFiscal;

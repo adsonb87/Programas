@@ -1,28 +1,22 @@
 package br.aeso.projeto.gui.cliente;
 
-import java.awt.JobAttributes;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import br.aeso.projeto.cliente.Cliente;
 import br.aeso.projeto.fachada.Fachada;
-import br.aeso.projeto.fornecedor.Fornecedor;
 import br.aeso.projeto.util.ClienteNaoEncontradoException;
-import br.aeso.projeto.util.ListaClienteVaziaException;
-import javax.swing.UIManager;
-import java.awt.Color;
 
 public class TelaCadastrarCliente extends JPanel {
 	private JTextField nomeTF;

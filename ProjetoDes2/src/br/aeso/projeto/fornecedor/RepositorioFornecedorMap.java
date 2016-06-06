@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.FornecedorNaoEncontradoException;
-import br.aeso.projeto.util.ListaFornecedorVaziaException;
-
 public class RepositorioFornecedorMap implements IRepositorioFornecedor{
 	
 	private Map<String, Fornecedor> listaFornecedor;

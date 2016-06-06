@@ -2,21 +2,18 @@ package br.aeso.projeto.gui.cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
 
 import br.aeso.projeto.cliente.Cliente;
 import br.aeso.projeto.fachada.Fachada;
-import br.aeso.projeto.util.ListaClienteVaziaException;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class TelaListarCliente extends JPanel {
 

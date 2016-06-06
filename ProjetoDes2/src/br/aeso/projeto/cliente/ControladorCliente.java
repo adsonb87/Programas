@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import br.aeso.projeto.util.ClienteNaoEncontradoException;
 import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaClienteVaziaException;
 
 public class ControladorCliente {
 	

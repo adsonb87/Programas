@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import br.aeso.projeto.util.CodigoInexistenteException;
 import br.aeso.projeto.util.FornecedorNaoEncontradoException;
-import br.aeso.projeto.util.ListaFornecedorVaziaException;
 
 public class ControladorFornecedor {
 	

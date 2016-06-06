@@ -2,11 +2,6 @@ package br.aeso.projeto.pedido;
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.cliente.Cliente;
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaPedidoVaziaException;
-import br.aeso.projeto.util.PedidoNaoEncontradoException;
-
 public interface IRepositorioPedido {
 	public void cadastrar (Pedido pedido);
 	public void atualizar (Pedido pedido);

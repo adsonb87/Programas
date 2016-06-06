@@ -1,19 +1,21 @@
 package br.aeso.projeto.gui.notafiscal;
 
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.TitledBorder;
 
 import br.aeso.projeto.fachada.Fachada;
+import br.aeso.projeto.pedido.Pedido;
 import br.aeso.projeto.util.CodigoInexistenteException;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaRemoverNota extends JPanel {
 	private JTextField codigoTF;
@@ -82,6 +84,7 @@ public class TelaRemoverNota extends JPanel {
 		Fachada fachada = Fachada.getInstance();
 		try {
 			if(fachada.removerNotaFiscal(codigoTF.getText())==true){
+				removerPedidoDaNota();
 				textPane.setText("Nota Fiscal removida com sucesso");
 				limparCampos();
 			}else{
@@ -91,6 +94,22 @@ public class TelaRemoverNota extends JPanel {
 		} catch (CodigoInexistenteException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+	}
+	
+	private void removerPedidoDaNota(){
+		Fachada fachada = Fachada.getInstance();
+		ArrayList<Pedido> lista = fachada.listarPedido();
+		
+		for(int i=0;i<lista.size();i++){
+			if(lista.get(i).getNotaFiscal().getCodigoNotaFiscal().equals(codigoTF.getText())){
+				try {
+					fachada.removerPedido(lista.get(i).getCodigoPedido());
+				} catch (CodigoInexistenteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 	

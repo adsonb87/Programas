@@ -2,10 +2,6 @@ package br.aeso.projeto.fornecedor;
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.FornecedorNaoEncontradoException;
-import br.aeso.projeto.util.ListaFornecedorVaziaException;
-
 public interface IRepositorioFornecedor {
 	
 	public void cadastrar (Fornecedor fornecedor);

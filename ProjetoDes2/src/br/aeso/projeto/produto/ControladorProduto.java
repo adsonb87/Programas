@@ -3,7 +3,6 @@ package br.aeso.projeto.produto;
 import java.util.ArrayList;
 
 import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaProdutoVaziaException;
 import br.aeso.projeto.util.ProdutoNaoEncontradoException;
 
 public class ControladorProduto {

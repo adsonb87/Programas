@@ -6,12 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaVendedorVaziaException;
-import br.aeso.projeto.util.VendedorNaoEncontradoException;
 
 public class RepositorioVendedorArquivo implements IRepositorioVendedor{
 	

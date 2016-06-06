@@ -2,11 +2,6 @@ package br.aeso.projeto.vendedor;
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaProdutoVaziaException;
-import br.aeso.projeto.util.ListaVendedorVaziaException;
-import br.aeso.projeto.util.VendedorNaoEncontradoException;
-
 public class RepositorioVendedorArray implements IRepositorioVendedor{
 	
 	private ArrayList<Vendedor> listaVendedor;

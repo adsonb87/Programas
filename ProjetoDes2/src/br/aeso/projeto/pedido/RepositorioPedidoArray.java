@@ -2,12 +2,6 @@ package br.aeso.projeto.pedido;
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.cliente.Cliente;
-import br.aeso.projeto.util.ClienteNaoEncontradoException;
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaPedidoVaziaException;
-import br.aeso.projeto.util.PedidoNaoEncontradoException;
-
 public class RepositorioPedidoArray implements IRepositorioPedido{
 	
 	private ArrayList<Pedido> listaPedido;

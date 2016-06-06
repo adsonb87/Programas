@@ -48,8 +48,8 @@ public class Produto {
 	
 	@Override
 	public String toString() {
-		return "Produto [codigoProduto=" + codigoProduto + ", nome=" + nome + ", precoProduto=" + precoProduto
-				+ ", dataVencimento=" + dataVencimento + "]\n";
+		return "Produto\nCodigo: " + codigoProduto + "\nNome: " + nome + "\nPreco: " + precoProduto
+				+ "\nData Vencimento: " + dataVencimento + "\n-----\n";
 	}
 	
 	

@@ -2,10 +2,6 @@
 
 import java.util.ArrayList;
 
-import br.aeso.projeto.util.ClienteNaoEncontradoException;
-import br.aeso.projeto.util.CodigoInexistenteException;
-import br.aeso.projeto.util.ListaClienteVaziaException;
-
 public class RepositorioClienteArray implements IRepositorioCliente{
 	
 	private ArrayList<Cliente> listaCliente;
